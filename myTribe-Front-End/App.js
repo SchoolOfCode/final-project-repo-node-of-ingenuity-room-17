@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import Welcome from './screens/Welcome';
+import { useState } from 'react';
+import AddChores from './screens/AddChores';
+
 export default function App() {
-	return <Welcome />;
+	return <AddChores />;
 }
 
 const styles = StyleSheet.create({
