@@ -18,6 +18,7 @@ import {
 import { auth } from '../firebase/firebaseConfig';
 import authErrorCheck from '../utils/authErrorCheck';
 
+
 export default function Login() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -42,6 +43,7 @@ export default function Login() {
 				authErrorCheck(error, setError);
 			});
 	};
+
 	return (
 		<ImageBackground source={bgImage} style={styles.container}>
 			<StatusBar color='white' style='light-content' />
@@ -67,6 +69,7 @@ export default function Login() {
 						onChangeText={(text) => setPassword(text)}
 						secureTextEntry
 					></TextInput>
+
 					<Text style={styles.error}>{error}</Text>
 					<Button
 						style={styles.btn}
@@ -79,6 +82,7 @@ export default function Login() {
 						color='white'
 						onPress={handleSignUp}
 					/>
+
 				</KeyboardAvoidingView>
 			</View>
 		</ImageBackground>
