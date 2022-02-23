@@ -16,17 +16,7 @@ export default function AddChores() {
 			<ScrollView
 				showsVerticalScrollIndicator={false}
 				style={styles.choreList}
-			>
-				{chores.map((el) => (
-					<Chore
-						key={el.id}
-						title={el.title}
-						member={el.member}
-						description={el.description}
-						dueDate={el.dueDate}
-					/>
-				))}
-			</ScrollView>
+			></ScrollView>
 			<View style={styles.btnContainer}>
 				<Button title='add chore' color='#FFBD00' />
 				<Button title='family management' color='#FFBD00' />
