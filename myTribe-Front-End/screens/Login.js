@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import bgImage from '../assets/main-background.jpeg';
 
-export default function Login() {
+export default function Login(props) {
 	return (
 		<ImageBackground source={bgImage} style={styles.container}>
 			{/* <Text>Open up App.js to start working on your app!</Text> */}
@@ -34,8 +34,16 @@ export default function Login() {
 						placeholderTextColor={'black'}
 						secureTextEntry
 					></TextInput>
-					<Button style={styles.btn} title='Login' color='white' />
-					<Button title='Create Account' color='white' />
+					<Button 
+						onPress={() => {
+              				props.navigation.navigate({ routeName: "Welcome" });
+            				}}
+					style={styles.btn} title='Login' color='white' />
+					<Button 
+					onPress={() => {
+              				props.navigation.navigate({ routeName: "SignUp" });
+            				}}
+					title='Create Account' color='white' />
 				</KeyboardAvoidingView>
 			</View>
 		</ImageBackground>
