@@ -8,12 +8,15 @@ import SignUp from "../screens/SignUp.js";
 import Welcome from "../screens/Welcome.js";
 
 const ChoresNavigator = createStackNavigator({
-  AddChores: AddChores,
-  ChoreList: ChoreList,
-  Family: Family,
   Login: Login,
   SignUp: SignUp,
   Welcome: Welcome,
-});
+  AddChores: AddChores,
+  ChoreList: ChoreList,
+  Family: Family,
+},
+//navigationOptions: { header: { visible: false } }
+
+);
 
 export default createAppContainer(ChoresNavigator);

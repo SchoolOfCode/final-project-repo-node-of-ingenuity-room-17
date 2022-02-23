@@ -44,6 +44,9 @@ export default function SignUp() {
 					<TextInput style={styles.input} secureTextEntry />
 					<View style={styles.btnContainer}>
 						<Button
+						onPress={() => {
+              				props.navigation.navigate({ routeName: "Family" });
+            				}}
 							buttonStyle={styles.btn}
 							color='#FEB800'
 							title='continue'
