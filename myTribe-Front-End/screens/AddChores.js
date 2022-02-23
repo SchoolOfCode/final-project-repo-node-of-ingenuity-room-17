@@ -5,15 +5,28 @@ import {
   Button,
   KeyboardAvoidingView,
   ScrollView,
+  TextInput,
+  Modal,
+  TouchableOpacity,
 } from "react-native";
 import { useEffect, useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import ModalPicker from "../components/ModalPicker";
 
 export default function AddChores() {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [text, setText] = useState("");
+  const [chooseData, setChooseData] = useState("Assigned to...");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const setData = (option) => {
+    setChooseData(option);
+  };
+  const changeModalVisible = (bool) => {
+    setIsModalVisible(bool);
+  };
 
   const onChange = (e, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -37,11 +50,16 @@ export default function AddChores() {
       <Text style={styles.heading}>This week's chores</Text>
       <Text style={styles.date}>21st February 2022</Text>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
+        <Text style={styles.subheading}>Chore Name</Text>
+        <TextInput style={styles.input}></TextInput>
+        <Text style={styles.subheading}>Description</Text>
+        <TextInput style={styles.input}></TextInput>
         <Button
-          title="due date"
-          color="#FFBD00"
+          title="Due Date"
+          color={styles.date}
           onPress={() => showMode("date")}
         ></Button>
+        {/* This allows the button to render the date */}
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -52,6 +70,23 @@ export default function AddChores() {
             onChange={onChange}
           />
         )}
+        <TouchableOpacity
+          style={styles.input}
+          onPress={() => changeModalVisible(true)}
+        >
+          <Text style={styles.text}>{chooseData}</Text>
+        </TouchableOpacity>
+        <Modal
+          transparent={true}
+          animationType="fade"
+          visible={isModalVisible}
+          nRequestClose={() => changeModalVisible(false)}
+        >
+          <ModalPicker
+            changeModalVisible={changeModalVisible}
+            setData={setData}
+          />
+        </Modal>
       </ScrollView>
       <View style={styles.btnContainer}>
         <Button title="add chore" color="#FFBD00" />
@@ -76,6 +111,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
   },
+  subHeading: {
+    fontSize: 24,
+    color: "white",
+  },
+
+  text: {
+    fontSize: 20,
+    color: "black",
+  },
 
   date: {
     color: "#AAAAAC",
@@ -88,5 +132,18 @@ const styles = StyleSheet.create({
   btnContainer: {
     paddingTop: 10,
     paddingBottom: 10,
+  },
+
+  input: {
+    width: "100%",
+    height: 40,
+    backgroundColor: "white",
+    borderRadius: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 30,
+  },
+  modal: {
+    backgroundColor: "white",
   },
 });
