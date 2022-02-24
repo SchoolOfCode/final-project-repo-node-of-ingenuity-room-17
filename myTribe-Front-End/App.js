@@ -4,7 +4,7 @@ import { useState } from "react";
 import Streak from "./screens/Streak";
 
 export default function App() {
-  return <Streak/>;
+  return <Streak />;
 }
 
 const styles = StyleSheet.create({

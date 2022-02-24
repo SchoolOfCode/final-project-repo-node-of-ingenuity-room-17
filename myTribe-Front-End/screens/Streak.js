@@ -1,40 +1,78 @@
-import {
-    StyleSheet,
-    Text,
-    View,
-    Button,
-    Image,
-  } from "react-native";
-  import { useState } from "react";
-  import streak from '../assets/fire-streak.png'
-  
+import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
+import { useState } from "react";
+import streak from "../assets/fire-streak.png";
 
 const Streak = () => {
   return (
     <View style={styles.container}>
-      <Image style={styles.streak} source={streak} />
+      <ImageBackground resizeMode="cover" style={styles.streak} source={streak}>
+        <View style={styles.streakOverlay}>
+          <Text style={styles.streakText}>3</Text>
+        </View>
+      </ImageBackground>
       <Text style={styles.heading}> 1 day streak! </Text>
-      <Text style={styles.subHeading}>Complete your chores everyday to build your streak!</Text>
+      <Text style={styles.subHeading}>
+        Complete your chores everyday to build your streak!
+      </Text>
+      <View style={styles.btnContainer}>
+        <Button title="Back to Home" color="#FFBD00" />
+      </View>
     </View>
-  )
-}
+  );
+};
 
-export default Streak
+export default Streak;
 
 const styles = StyleSheet.create({
-    container: {
-        height: "100%",
-        width: "100%",
-      },
-    
-      heading: {
-        fontSize: 40,
-        fontWeight: "bold",
-        color: "white",
-      },
+  // Containers
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
+  },
 
-      subHeading: {
-        fontSize: 20,
-        color: "white",
-      },
-})
+  btnContainer: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+
+  // Text
+  heading: {
+    fontSize: 40,
+    fontWeight: "bold",
+    color: "black",
+  },
+
+  subHeading: {
+    fontSize: 20,
+    color: "black",
+    padding: 30,
+  },
+
+  streakText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
+    paddingRight: 50,
+  },
+
+  //Image
+  streak: {
+    height: 300,
+    width: "100%",
+    resizeMode: "cover",
+  },
+  streakOverlay: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
+    paddingLeft: 50,
+    paddingRight: 50,
+    position: "absolute",
+    left: 10,
+  },
+});
