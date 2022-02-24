@@ -3,20 +3,52 @@ import {
 	Text,
 	View,
 	ImageBackground,
-	Image,
 	TextInput,
 	Button,
 	KeyboardAvoidingView,
 	Dimensions,
 	ScrollView,
 } from 'react-native';
+import { useState, useEffect } from 'react';
 import headerImage from '../assets/family-background.jpeg';
 import addUserIcon from '../assets/add-user-light.png';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import AddFamilyMember from '../components/AddFamilyMember';
 
 const screenHeight = Dimensions.get('window').height;
+//TODO: change addImage when clicked to a remove icon so the user can remove the extra user that they added.
 
-export default function Family() {
+export default function Family(props) {
+	const [family, setFamily] = useState(false);
+	const [familyName, setFamilyName] = useState('');
+	const [members, setMembers] = useState([]);
+	const [addMemberControls, setMemberControls] = useState(1);
+
+	const addMemberHandler = () => {
+		console.log(addMemberControls);
+		setMemberControls(addMemberControls + 1);
+	};
+
+	const renderMemberControls = () => {
+		const elements = [];
+		for (let i = 0; i < addMemberControls; i++) {
+			elements.push(
+				<AddFamilyMember key={i} pressHandler={addMemberHandler} />
+			);
+		}
+		return elements;
+	};
+
+	useEffect(() => {
+		if (!family) {
+			const newFamily = {
+				uid: props.navigation.getParam('uid'),
+				name: props.navigation.getParam('name'),
+			};
+			setFamily(newFamily);
+		}
+	}, []);
+
 	return (
 		<KeyboardAvoidingView
 			behavior='position'
@@ -46,7 +78,10 @@ export default function Family() {
 							Family Details
 						</Text>
 						<Text style={styles.label}>Family Name</Text>
-						<TextInput style={styles.input} />
+						<TextInput
+							onChangeText={(text) => setFamilyName(text)}
+							style={styles.input}
+						/>
 						<Text style={styles.subSectionHeading}>
 							Family members
 						</Text>
@@ -55,61 +90,7 @@ export default function Family() {
 								<Text style={styles.memberLabel}>Name</Text>
 								<Text style={styles.memberLabel}>Parent</Text>
 							</View>
-							<View style={styles.memberControls}>
-								<TextInput style={[styles.memberInput]} />
-								<BouncyCheckbox
-									fillColor='#FFBD00'
-									style={styles.checkBox}
-								/>
-								<Image
-									style={styles.addIcon}
-									source={addUserIcon}
-								/>
-							</View>
-							<View style={styles.memberControls}>
-								<TextInput style={[styles.memberInput]} />
-								<BouncyCheckbox
-									fillColor='#FFBD00'
-									style={styles.checkBox}
-								/>
-								<Image
-									style={styles.addIcon}
-									source={addUserIcon}
-								/>
-							</View>
-							<View style={styles.memberControls}>
-								<TextInput style={[styles.memberInput]} />
-								<BouncyCheckbox
-									fillColor='#FFBD00'
-									style={styles.checkBox}
-								/>
-								<Image
-									style={styles.addIcon}
-									source={addUserIcon}
-								/>
-							</View>
-							<View style={styles.memberControls}>
-								<TextInput style={[styles.memberInput]} />
-								<BouncyCheckbox
-									fillColor='#FFBD00'
-									style={styles.checkBox}
-								/>
-								<Image
-									style={styles.addIcon}
-									source={addUserIcon}
-								/>
-							</View>
-							<View style={styles.memberControls}>
-								<TextInput style={[styles.memberInput]} />
-								<BouncyCheckbox
-									fillColor='#FFBD00'
-									style={styles.checkBox}
-								/>
-								<Image
-									style={styles.addIcon}
-									source={addUserIcon}
-								/>
-							</View>
+							{renderMemberControls()}
 						</View>
 					</ScrollView>
 					<View style={styles.btnContainer}>
