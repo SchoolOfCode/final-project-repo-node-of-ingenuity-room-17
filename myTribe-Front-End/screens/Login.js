@@ -18,26 +18,16 @@ import {
 import { auth } from '../firebase/firebaseConfig';
 import authErrorCheck from '../utils/authErrorCheck';
 
-
-export default function Login() {
+export default function Login(props) {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
-
-	const handleSignUp = () => {
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredentials) => {
-				const user = userCredentials.user;
-				console.log(user.uid);
-			})
-			.catch((error) => authErrorCheck(error, setError));
-	};
 
 	const handleSignIn = () => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredentials) => {
 				const user = userCredentials.user;
-				console.log('User successfully logged in: ', user.email);
+				console.log('User successfully logged in: ', user.uid);
 			})
 			.catch((error) => {
 				authErrorCheck(error, setError);
@@ -80,9 +70,12 @@ export default function Login() {
 					<Button
 						title='Create Account'
 						color='white'
-						onPress={handleSignUp}
+						onPress={() =>
+							props.navigation.navigate({
+								routeName: 'SignUp',
+							})
+						}
 					/>
-
 				</KeyboardAvoidingView>
 			</View>
 		</ImageBackground>
