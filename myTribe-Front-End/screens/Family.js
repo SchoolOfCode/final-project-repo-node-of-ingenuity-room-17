@@ -3,12 +3,14 @@ import {
   Text,
   View,
   ImageBackground,
+  Image,
   TextInput,
   Button,
   KeyboardAvoidingView,
   Dimensions,
   ScrollView,
 } from "react-native";
+
 import { useState, useEffect } from "react";
 import headerImage from "../assets/family-background.jpeg";
 import addUserIcon from "../assets/add-user-light.png";
@@ -55,6 +57,7 @@ export default function Family(props) {
     }
   }, []);
 
+
   return (
     <KeyboardAvoidingView
       behavior="position"
@@ -77,16 +80,20 @@ export default function Family(props) {
           >
             <Text style={styles.sectionHeading}>Family Details</Text>
             <Text style={styles.label}>Family Name</Text>
+
             <TextInput
               onChangeText={(text) => setFamilyName(text)}
               style={styles.input}
             />
+
             <Text style={styles.subSectionHeading}>Family members</Text>
             <View style={styles.familyMembersBox}>
               <View style={styles.memberLabels}>
                 <Text style={styles.memberLabel}>Name</Text>
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
+
+
               {renderMemberControls()}
             </View>
           </ScrollView>
@@ -96,6 +103,7 @@ export default function Family(props) {
               color="#FEB800"
               onPress={continueHandler}
             />
+
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
