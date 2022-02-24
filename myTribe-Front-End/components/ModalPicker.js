@@ -8,7 +8,16 @@ import {
 } from "react-native";
 import React from "react";
 //DUMMY OPTIONS DATE
-const OPTIONS = ["Eleanor", "Samuel", "Billy", "Brianna"];
+const OPTIONS = [
+  "Eleanor",
+  "Samuel",
+  "Billy",
+  "Brianna",
+  "Eddie",
+  "David",
+  "Lizzie",
+  "Sandra",
+];
 // SET SIZE OF MODAL
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
@@ -22,8 +31,8 @@ const ModalPicker = (props) => {
   //GOES THROUGH DUMMY DATA AT INDEX
   const option = OPTIONS.map((item, index) => {
     return (
-      <TouchableOpacity key={index} onPress={() => onPressItem(option)}>
-        <Text style={styles.text}>{item}</Text>
+      <TouchableOpacity key={index} onPress={() => onPressItem(item)}>
+        <Text style={styles.option}>{item}</Text>
       </TouchableOpacity>
     );
   });
@@ -33,9 +42,7 @@ const ModalPicker = (props) => {
       onPress={() => props.changeModalVisible(false)}
     >
       <View style={[styles.modal, { width: WIDTH - 20, height: HEIGHT / 2 }]}>
-        <ScrollView>
-          <Text style={styles.text}>{option}</Text>
-        </ScrollView>
+        <ScrollView>{option}</ScrollView>
       </View>
     </TouchableOpacity>
   );
@@ -52,15 +59,12 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: "white",
     borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
   },
-  text: {
-    alignItems: "flex-start",
-    color: "orange",
-    fontSize: 18,
-  },
+
   option: {
+    justifyContent: "flex-start",
     alignItems: "flex-start",
+    fontWeight: "bold",
+    padding: 20,
   },
 });
