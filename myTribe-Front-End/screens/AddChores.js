@@ -14,20 +14,25 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import ModalPicker from "../components/ModalPicker";
 
 export default function AddChores() {
+  //DATE USE STATES
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const [text, setText] = useState("");
-  const [chooseData, setChooseData] = useState("Assigned to...");
+  // MODAL USE STATES
+  const [chooseData, setChooseData] = useState("Assigned To...");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  //MODAL FUNCTIONS
   const setData = (option) => {
     setChooseData(option);
   };
+
   const changeModalVisible = (bool) => {
     setIsModalVisible(bool);
   };
-
+  // const displayDate = new Date().getDate().getMonth().getFullYear();
+  // DATE FUNCTIONS
   const onChange = (e, selectedDate) => {
     const currentDate = selectedDate || date;
     setDate(currentDate);
@@ -41,21 +46,25 @@ export default function AddChores() {
   };
 
   const showMode = (currentMode) => {
-    setShow(true);
+    setShow(!show);
     setMode(currentMode);
   };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
+      {/* Top Bar */}
       <Text style={styles.heading}>This week's chores</Text>
-      <Text style={styles.date}>21st February 2022</Text>
+      <Text style={styles.date}>Current Date</Text>
+      {/* Main Content */}
       <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
         <Text style={styles.subheading}>Chore Name</Text>
         <TextInput style={styles.input}></TextInput>
         <Text style={styles.subheading}>Description</Text>
         <TextInput style={styles.input}></TextInput>
+        {/* Date Picker Button */}
         <Button
           title="Due Date"
+          style={styles.subHeading}
           color={styles.date}
           onPress={() => showMode("date")}
         ></Button>
@@ -70,8 +79,9 @@ export default function AddChores() {
             onChange={onChange}
           />
         )}
+        {/* Modal Dropdown */}
         <TouchableOpacity
-          style={styles.input}
+          style={styles.touchableOpacity}
           onPress={() => changeModalVisible(true)}
         >
           <Text style={styles.text}>{chooseData}</Text>
@@ -88,6 +98,7 @@ export default function AddChores() {
           />
         </Modal>
       </ScrollView>
+      {/* Footer Buttons */}
       <View style={styles.btnContainer}>
         <Button title="add chore" color="#FFBD00" />
         <Button title="family management" color="#FFBD00" />
@@ -145,5 +156,19 @@ const styles = StyleSheet.create({
   },
   modal: {
     backgroundColor: "white",
+  },
+  dateDisplay: {
+    backgroundColor: "white",
+    color: "black",
+    fontSize: 18,
+  },
+  touchableOpacity: {
+    width: "100%",
+    height: 40,
+    backgroundColor: "white",
+    borderRadius: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 30,
   },
 });
