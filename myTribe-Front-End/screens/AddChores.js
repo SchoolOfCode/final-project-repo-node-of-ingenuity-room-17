@@ -64,7 +64,7 @@ export default function AddChores() {
         {/* Date Picker Button */}
         <Button
           title="Due Date"
-          style={styles.subHeading}
+          style={styles.subheading}
           color={styles.date}
           onPress={() => showMode("date")}
         ></Button>
