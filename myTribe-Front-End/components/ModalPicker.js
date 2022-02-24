@@ -22,9 +22,7 @@ const ModalPicker = (props) => {
   //GOES THROUGH DUMMY DATA AT INDEX
   const option = OPTIONS.map((item, index) => {
     return (
-      <TouchableOpacity>
-        key={index}
-        onPress{() => onPressItem(option)}
+      <TouchableOpacity key={index} onPress={() => onPressItem(option)}>
         <Text style={styles.text}>{item}</Text>
       </TouchableOpacity>
     );
@@ -36,7 +34,7 @@ const ModalPicker = (props) => {
     >
       <View style={[styles.modal, { width: WIDTH - 20, height: HEIGHT / 2 }]}>
         <ScrollView>
-          <Text style={styles.text}>text</Text>
+          <Text style={styles.text}>{option}</Text>
         </ScrollView>
       </View>
     </TouchableOpacity>
