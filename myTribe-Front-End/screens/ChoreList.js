@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 import Chore from '../components/Chore';
 
-export default function ChoreList() {
+export default function ChoreList(props) {
 	const [chores, setChores] = useState([
 		{
 			id: 1,
@@ -47,6 +47,10 @@ export default function ChoreList() {
 			dueDate: '21.02.2022',
 		},
 	]);
+
+	const familyManagementHandler = () => {
+		props.navigation.navigate({ routeName: 'Family' });
+	};
 	return (
 		<KeyboardAvoidingView style={styles.container}>
 			<Text style={styles.heading}>This week's chores</Text>
@@ -67,7 +71,11 @@ export default function ChoreList() {
 			</ScrollView>
 			<View style={styles.btnContainer}>
 				<Button title='add chore' color='#FFBD00' />
-				<Button title='family management' color='#FFBD00' />
+				<Button
+					onPress={familyManagementHandler}
+					title='family management'
+					color='#FFBD00'
+				/>
 				<Button title='logout' color='#FFBD00' />
 			</View>
 		</KeyboardAvoidingView>
