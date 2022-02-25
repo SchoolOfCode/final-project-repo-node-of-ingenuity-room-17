@@ -1,15 +1,12 @@
-
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
-import AddChores from "./screens/AddChores";
+import Dashboard from "./screens/Dashboard";
 
 import ChoresNavigator from "./navigation/NavigationStack";
 
 export default function App() {
-  return <ChoresNavigator />;
-
-
+  return <Dashboard />;
 }
 
 const styles = StyleSheet.create({
