@@ -18,7 +18,9 @@ import {
 	signOut,
 } from 'firebase/auth';
 import { auth } from '../firebase/firebaseConfig';
+import { addToDb } from '../firebase/firestore';
 import authErrorCheck from '../utils/authErrorCheck';
+import { DocumentReference } from 'firebase/firestore';
 const screenHeight = Dimensions.get('window').height;
 
 export default function SignUp(props) {
@@ -33,11 +35,16 @@ export default function SignUp(props) {
 			createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredentials) => {
 					const user = userCredentials.user;
-					console.log('User details are: ', user.uid);
-					props.navigation.setParams({ routeName: 'Family' });
-					props.navigation.navigate('Family', {
+					const family = {
 						uid: user.uid,
-						name: name,
+						members: [{ id: 1, name: name, isParent: true }],
+					};
+					addToDb(family).then((res) => {
+						props.navigation.setParams({ routeName: 'Family' });
+						props.navigation.navigate('Family', {
+							family: family,
+							docID: res,
+						});
 					});
 				})
 				.catch((error) => authErrorCheck(error, setError));
