@@ -3,14 +3,24 @@ import { useState } from "react";
 import streak from "../assets/fire-streak.png";
 
 const Streak = () => {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount(count + 1);
+    console.log("count:", count);
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground resizeMode="cover" style={styles.streak} source={streak}>
         <View style={styles.streakOverlay}>
-          <Text style={styles.streakText}>3</Text>
+          {/* <Text style={styles.streakText}>3</Text> */}
         </View>
       </ImageBackground>
-      <Text style={styles.heading}> 1 day streak! </Text>
+      <Text style={styles.heading} onPress={handleIncrement}>
+        {" "}
+        {count} day streak!{" "}
+      </Text>
       <Text style={styles.subHeading}>
         Complete your chores everyday to build your streak!
       </Text>
