@@ -11,6 +11,10 @@ import {
 import React from "react";
 import dashImage from "../assets/dashImage.jpeg";
 import flame from "../assets/fire-streak.png";
+import manageFamily from "../assets/ManageFamily.png";
+import viewChores from "../assets/viewChores.png";
+import manageChores from "../assets/manageChores.png";
+import showStreak from "../assets/showStreak.png";
 
 const Dashboard = () => {
   return (
@@ -29,7 +33,7 @@ const Dashboard = () => {
         <View style={[styles.statusBlock, { zIndex: 2 }]}>
           <View style={styles.statusButton}>
             <Text style={styles.statusText}>Chores</Text>
-            <Text style={styles.statusNumber}>4</Text>
+            <Text style={styles.statusNumber}>5</Text>
           </View>
           <View style={styles.statusButton}>
             <Image style={styles.flame} source={flame} />
@@ -37,11 +41,26 @@ const Dashboard = () => {
         </View>
       </ImageBackground>
       {/* Main Content */}
-      <View style={styles.container}>
-        <View style={styles.dashboardButton}>
-          <Text>WORK BRO</Text>
+      <ScrollView style={styles.container}>
+        <View style={styles.buttonContainer}>
+          <View style={styles.mainButton}>
+            <Image style={styles.mainButtonImage} source={viewChores} />
+            <Text style={styles.mainButtonText}>View Chores</Text>
+          </View>
+          <View style={styles.mainButton}>
+            <Image style={styles.mainButtonImage} source={manageChores} />
+            <Text style={styles.mainButtonText}>Manage Chores</Text>
+          </View>
+          <View style={styles.mainButton}>
+            <Image style={styles.mainButtonImage} source={manageFamily} />
+            <Text style={styles.mainButtonText}>Manage Family</Text>
+          </View>
+          <View style={styles.mainButton}>
+            <Image style={styles.mainButtonImage} source={showStreak} />
+            <Text style={styles.mainButtonText}>Show Streak</Text>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -54,7 +73,7 @@ const styles = StyleSheet.create({
     height: 250,
     width: "100%",
     resizeMode: "cover",
-    position: "absolute",
+    position: "relative",
   },
   overlay: {
     justifyContent: "center",
@@ -77,27 +96,28 @@ const styles = StyleSheet.create({
 
   //STATUS BAR
   statusBlock: {
-    flex: 1,
+    // flex: 1,
     width: "100%",
-    height: "78%",
+    height: "50%",
     backgroundColor: "#FEB800",
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    position: "absolute",
-    top: 200,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    // position: "relative",
+    top: -18,
+    // zIndex: 2,
     justifyContent: "space-evenly",
     flexDirection: "row",
     alignItems: "center",
-    bottom: 30,
+    // bottom: 30,
   },
 
   statusButton: {
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -20,
-    width: "35%",
-    height: "60%",
+    marginTop: -8,
+    width: "30%",
+    height: "77%",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -113,7 +133,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingTop: 20,
     textAlign: "center",
-    fontSize: 25,
+    fontSize: 20,
   },
   statusNumber: {
     fontWeight: "bold",
@@ -128,30 +148,54 @@ const styles = StyleSheet.create({
 
   // MAIN CONTENT
   container: {
+    backgroundColor: "#F2F0F0",
+    zIndex: 1,
     width: "100%",
     height: "100%",
-    backgroundColor: "#F2F0F0",
-    // borderTopLeftRadius: 30,
-    // borderTopRightRadius: 30,
-
-    position: "relative",
-    top: 370,
-  },
-
-  mainBlock: {
-    backgroundColor: "#F2F0F0",
-    width: "100%",
-    height: "60%",
-    top: 300,
-  },
-
-  dashboardButton: {
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "35%",
-    height: "60%",
+    textAlign: "center",
+    color: "black",
+    top: 100,
     borderRadius: 10,
-    zIndex: 5,
+  },
+
+  buttonContainer: {
+    color: "white",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    flexDirection: "row",
+    marginTop: 50,
+    width: "100%",
+    flexWrap: "wrap",
+  },
+
+  mainButton: {
+    flexDirection: "column",
+    justifyContent: "center",
+    // alignItems: "center",
+    backgroundColor: "white",
+    width: 150,
+    height: 130,
+    borderRadius: 15,
+    margin: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  mainButtonText: {
+    fontSize: 18,
+    padding: 5,
+    alignSelf: "center",
+    top: 10,
+  },
+  mainButtonImage: {
+    height: 60,
+    width: 60,
+    alignSelf: "center",
   },
 });
