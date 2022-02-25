@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import dashImage from "../assets/dashImage.jpeg";
 
@@ -16,6 +22,7 @@ const Dashboard = () => {
         </View>
         <View style={[styles.orangeBlock, { zIndex: 1 }]}></View>
       </ImageBackground>
+      <ScrollView style={[styles.greyBlock]}></ScrollView>
     </View>
   );
 };
@@ -55,5 +62,12 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     position: "absolute",
     top: 200,
+  },
+  greyBlock: {
+    backgroundColor: "pink",
+    width: "100%",
+    height: "60%",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
   },
 });
