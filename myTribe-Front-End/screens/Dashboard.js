@@ -3,10 +3,12 @@ import {
   Text,
   View,
   ImageBackground,
+  Image,
   ScrollView,
 } from "react-native";
 import React from "react";
 import dashImage from "../assets/dashImage.jpeg";
+import flame from "../assets/fire-streak.png";
 
 const Dashboard = () => {
   return (
@@ -26,10 +28,15 @@ const Dashboard = () => {
             <Text style={styles.statusNumber}>4</Text>
           </View>
           <View style={styles.statusButton}>
-            <Text></Text>
+            <Image style={styles.flame} source={flame} />
           </View>
         </View>
       </ImageBackground>
+      <ScrollView style={styles.container}>
+        <View style={styles.dashboardButton}>
+          <Image style={styles.flame} source={flame} />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
   statusBlock: {
     flex: 1,
     width: "100%",
-    height: "70%",
+    height: "78%",
     backgroundColor: "#FEB800",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
@@ -83,8 +90,11 @@ const styles = StyleSheet.create({
   },
   statusButton: {
     backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -20,
     width: "35%",
-    height: "70%",
+    height: "60%",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -107,5 +117,30 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 40,
     color: "#FEB800",
+  },
+  flame: {
+    height: "70%",
+    width: "80%",
+  },
+  container: {
+    width: "100%",
+    height: "70%",
+    backgroundColor: "#F2F0F0",
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
+
+    position: "relative",
+    top: 370,
+  },
+  dashboardButton: {
+    backgroundColor: "blue",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -20,
+    width: "35%",
+    height: "60%",
+    borderRadius: 10,
+    position: "absolute",
+    top: 10,
   },
 });
