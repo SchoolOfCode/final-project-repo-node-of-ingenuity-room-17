@@ -20,9 +20,16 @@ const Dashboard = () => {
           <Text style={styles.heading}>Dashboard</Text>
           <Text style={styles.subHeading}>Emma</Text>
         </View>
-        <View style={[styles.orangeBlock, { zIndex: 1 }]}></View>
+        <View style={[styles.statusBlock, { zIndex: 2 }]}>
+          <View style={styles.statusButton}>
+            <Text style={styles.statusText}>Chores</Text>
+            <Text style={styles.statusNumber}>4</Text>
+          </View>
+          <View style={styles.statusButton}>
+            <Text></Text>
+          </View>
+        </View>
       </ImageBackground>
-      <ScrollView style={[styles.greyBlock]}></ScrollView>
     </View>
   );
 };
@@ -54,20 +61,51 @@ const styles = StyleSheet.create({
     color: "white",
     marginTop: 40,
   },
-  orangeBlock: {
+  statusBlock: {
+    flex: 1,
     width: "100%",
-    height: "40%",
+    height: "70%",
     backgroundColor: "#FEB800",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
     position: "absolute",
     top: 200,
+    justifyContent: "space-evenly",
+    flexDirection: "row",
+    alignItems: "center",
+    bottom: 30,
   },
-  greyBlock: {
-    backgroundColor: "pink",
+  mainBlock: {
+    backgroundColor: "#F2F0F0",
     width: "100%",
     height: "60%",
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    top: 300,
+  },
+  statusButton: {
+    backgroundColor: "white",
+    width: "35%",
+    height: "70%",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  statusText: {
+    fontWeight: "bold",
+    paddingTop: 20,
+    textAlign: "center",
+    fontSize: 25,
+  },
+  statusNumber: {
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: 40,
+    color: "#FEB800",
   },
 });
