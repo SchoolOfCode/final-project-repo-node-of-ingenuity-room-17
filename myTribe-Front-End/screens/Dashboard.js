@@ -5,6 +5,8 @@ import {
   ImageBackground,
   Image,
   ScrollView,
+  SafeAreaView,
+  FlatList,
 } from "react-native";
 import React from "react";
 import dashImage from "../assets/dashImage.jpeg";
@@ -13,6 +15,7 @@ import flame from "../assets/fire-streak.png";
 const Dashboard = () => {
   return (
     <View>
+      {/* Top Image */}
       <ImageBackground
         resizeMode="cover"
         style={styles.header}
@@ -22,6 +25,7 @@ const Dashboard = () => {
           <Text style={styles.heading}>Dashboard</Text>
           <Text style={styles.subHeading}>Emma</Text>
         </View>
+        {/* Status Bar */}
         <View style={[styles.statusBlock, { zIndex: 2 }]}>
           <View style={styles.statusButton}>
             <Text style={styles.statusText}>Chores</Text>
@@ -32,11 +36,12 @@ const Dashboard = () => {
           </View>
         </View>
       </ImageBackground>
-      <ScrollView style={styles.container}>
+      {/* Main Content */}
+      <View style={styles.container}>
         <View style={styles.dashboardButton}>
-          <Image style={styles.flame} source={flame} />
+          <Text>WORK BRO</Text>
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 };
@@ -44,6 +49,7 @@ const Dashboard = () => {
 export default Dashboard;
 
 const styles = StyleSheet.create({
+  //TOP IMAGE
   header: {
     height: 250,
     width: "100%",
@@ -68,6 +74,8 @@ const styles = StyleSheet.create({
     color: "white",
     marginTop: 40,
   },
+
+  //STATUS BAR
   statusBlock: {
     flex: 1,
     width: "100%",
@@ -82,12 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     bottom: 30,
   },
-  mainBlock: {
-    backgroundColor: "#F2F0F0",
-    width: "100%",
-    height: "60%",
-    top: 300,
-  },
+
   statusButton: {
     backgroundColor: "white",
     justifyContent: "center",
@@ -122,9 +125,11 @@ const styles = StyleSheet.create({
     height: "70%",
     width: "80%",
   },
+
+  // MAIN CONTENT
   container: {
     width: "100%",
-    height: "70%",
+    height: "100%",
     backgroundColor: "#F2F0F0",
     // borderTopLeftRadius: 30,
     // borderTopRightRadius: 30,
@@ -132,15 +137,21 @@ const styles = StyleSheet.create({
     position: "relative",
     top: 370,
   },
+
+  mainBlock: {
+    backgroundColor: "#F2F0F0",
+    width: "100%",
+    height: "60%",
+    top: 300,
+  },
+
   dashboardButton: {
-    backgroundColor: "blue",
+    backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -20,
     width: "35%",
     height: "60%",
     borderRadius: 10,
-    position: "absolute",
-    top: 10,
+    zIndex: 5,
   },
 });
