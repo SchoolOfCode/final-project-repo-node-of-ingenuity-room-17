@@ -1,17 +1,20 @@
 import { db } from './firebaseConfig';
 import {
-	doc,
-	setDoc,
 	collection,
-	getDocs,
+	addDoc,
 	where,
 	query,
+	getDocs,
+	updateDoc,
+	doc,
 } from 'firebase/firestore';
 
+// Add a new document with a generated id.
+
 export async function addToDb(family) {
-	const newFamily = doc(collection(db, 'families'));
-	const res = await setDoc(newFamily, family);
-	return res;
+	const docRef = await addDoc(collection(db, 'families'), family);
+	console.log('Document written: ', docRef.id);
+	return docRef.id;
 }
 
 export async function getFamily(uid) {
@@ -21,4 +24,10 @@ export async function getFamily(uid) {
 	querySnapshot.forEach((doc) => {
 		results.push(doc.data());
 	});
+	return results;
+}
+
+export async function updateFamily(data, docID) {
+	const familyRef = doc(db, 'families', docID);
+	const res = await updateDoc(familyRef, data);
 }

@@ -6,71 +6,62 @@ import {
 	KeyboardAvoidingView,
 	ScrollView,
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Chore from '../components/Chore';
 
 export default function ChoreList(props) {
-	const [chores, setChores] = useState([
-		{
-			id: 1,
-			title: 'Tidy room',
-			member: 'Jeff',
-			description: 'Lorem ipsum lorem lorem ipsum lorem ipsum lorem',
-			dueDate: '21.02.2022',
-		},
-		{
-			id: 2,
-			title: 'Tidy room',
-			member: 'Jeff',
-			description: 'Lorem ipsum lorem lorem ipsum lorem ipsum lorem',
-			dueDate: '21.02.2022',
-		},
-		{
-			id: 3,
-			title: 'Tidy room',
-			member: 'Jeff',
-			description: 'Lorem ipsum lorem lorem ipsum lorem ipsum lorem',
-			dueDate: '21.02.2022',
-		},
-		{
-			id: 4,
-			title: 'Tidy room',
-			member: 'Jeff',
-			description: 'Lorem ipsum lorem lorem ipsum lorem ipsum lorem',
-			dueDate: '21.02.2022',
-		},
-		{
-			id: 5,
-			title: 'Tidy room',
-			member: 'Jeff',
-			description: 'Lorem ipsum lorem lorem ipsum lorem ipsum lorem',
-			dueDate: '21.02.2022',
-		},
-	]);
+	const [family, setFamily] = useState(false);
+	const [member, setMember] = useState(false);
+	const [chores, setChores] = useState(false);
+
+	useEffect(() => {
+		const currentFamily = props.navigation.getParam('family');
+		const currentMember = props.navigation.getParam('member');
+		if (currentFamily.chores !== undefined) {
+			setChores(currentFamily.chores);
+		}
+		setFamily(currentFamily);
+		setMember(currentMember);
+	});
 
 	const familyManagementHandler = () => {
 		props.navigation.navigate({ routeName: 'Family' });
 	};
+
+	const addChoreHandler = () => {
+		props.navigation.setParams({ routeName: 'AddChores' });
+		props.navigation.navigate('AddChores', {
+			family: family,
+		});
+	};
 	return (
 		<KeyboardAvoidingView style={styles.container}>
-			<Text style={styles.heading}>This week's chores</Text>
+			<Text style={styles.heading}>{member && member}</Text>
 			<Text style={styles.date}>21st February 2022</Text>
 			<ScrollView
 				showsVerticalScrollIndicator={false}
 				style={styles.choreList}
 			>
-				{chores.map((el) => (
-					<Chore
-						key={el.id}
-						title={el.title}
-						member={el.member}
-						description={el.description}
-						dueDate={el.dueDate}
-					/>
-				))}
+				{chores ? (
+					chores.map((el) => (
+						<Chore
+							key={el.id}
+							title={el.title}
+							member={el.member}
+							description={el.description}
+							dueDate={el.dueDate}
+						/>
+					))
+				) : (
+					<Text>You haven't added any chores to your list.</Text>
+				)}
 			</ScrollView>
 			<View style={styles.btnContainer}>
-				<Button title='add chore' color='#FFBD00' />
+				<Button
+					onPress={addChoreHandler}
+					title='add chore'
+					color='#FFBD00'
+				/>
 				<Button
 					onPress={familyManagementHandler}
 					title='family management'

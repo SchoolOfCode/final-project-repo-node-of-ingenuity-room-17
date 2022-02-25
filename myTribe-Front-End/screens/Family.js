@@ -14,7 +14,7 @@ import {
 import { useState, useEffect } from 'react';
 import headerImage from '../assets/family-background.jpeg';
 import AddFamilyMember from '../components/AddFamilyMember';
-import { addToDb, getFamily } from '../firebase/firestore';
+import { addToDb, getFamily, updateFamily } from '../firebase/firestore';
 
 const screenHeight = Dimensions.get('window').height;
 //TODO: change addImage when clicked to a remove icon so the user can remove the extra user that they added.
@@ -24,56 +24,56 @@ export default function Family(props) {
 	const [familyName, setFamilyName] = useState('');
 	const [members, setMembers] = useState([]);
 	const [addMemberControls, setMemberControls] = useState(1);
+	const [docID, setDocID] = useState('');
 
 	const addMemberHandler = () => {
 		setMemberControls(addMemberControls + 1);
+	};
+
+	const addMember = (name, isParent) => {
+		let id = members[members.length - 1].id + 1;
+		const newMembers = [
+			...members,
+			{ id: id, name: name, isParent: isParent },
+		];
+		setMembers(newMembers);
 	};
 
 	const renderMemberControls = () => {
 		const elements = [];
 		for (let i = 0; i < addMemberControls; i++) {
 			elements.push(
-				<AddFamilyMember key={i} pressHandler={addMemberHandler} />
+				<AddFamilyMember
+					key={i}
+					pressHandler={addMemberHandler}
+					addMember={addMember}
+				/>
 			);
 		}
 		return elements;
 	};
 
 	function continueHandler() {
-		const newFamily = { ...family, familyName: familyName };
-		const res = addToDb(newFamily);
+		const familyFinal = {
+			...family,
+			familyName: familyName,
+			members: members,
+			docRef: docID,
+		};
+		updateFamily(familyFinal, docID);
+		setFamily(familyFinal);
 		props.navigation.setParams({ routeName: 'ChoreList' });
-		props.navigation.navigate('ChoreList', newFamily);
-		setFamily(newFamily);
+		props.navigation.navigate('ChoreList', {
+			family: familyFinal,
+			member: familyFinal.members[0].name,
+		});
 	}
 
 	useEffect(() => {
-		getFamily(props.navigation.getParam('uid')).then((res) => {
-			if (res === undefined) {
-				console.log('Family not defined! Setting up family details.');
-				const newFamily = {
-					uid: props.navigation.getParam('uid'),
-					members: [
-						{
-							id: 1,
-							name: props.navigation.getParam('name'),
-							isParent: true,
-						},
-					],
-				};
-				setFamily(newFamily);
-				setMembers(family.members);
-			} else {
-				console.log('Family found: ', res);
-			}
-		});
-
-		// console.log('Family found:', apiFamily);
-		// if (apiFamily.length === 0) {
-		//
-
-		// 	return;
-		// }
+		const newFamily = props.navigation.getParam('family');
+		setFamily(newFamily);
+		setMembers(newFamily.members);
+		setDocID(props.navigation.getParam('docID'));
 	}, []);
 
 	return (
