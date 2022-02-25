@@ -18,7 +18,7 @@ import showStreak from "../assets/showStreak.png";
 
 const Dashboard = () => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {/* Top Image */}
       <ImageBackground
         resizeMode="cover"
