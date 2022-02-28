@@ -57,7 +57,6 @@ export default function Family(props) {
     }
   }, []);
 
-
   return (
     <KeyboardAvoidingView
       behavior="position"
@@ -93,7 +92,6 @@ export default function Family(props) {
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
 
-
               {renderMemberControls()}
             </View>
           </ScrollView>
@@ -101,9 +99,13 @@ export default function Family(props) {
             <Button
               title="continue"
               color="#FEB800"
-              onPress={continueHandler}
+              // onPress={continueHandler}
+              onPress={() =>
+                props.navigation.navigate({
+                  routeName: "Dashboard",
+                })
+              }
             />
-
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
