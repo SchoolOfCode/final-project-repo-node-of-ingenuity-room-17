@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import ModalPicker from "../components/ModalPicker";
 
-export default function AddChores() {
+export default function AddChores(props) {
   //DATE USE STATES
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
@@ -100,9 +100,17 @@ export default function AddChores() {
       </ScrollView>
       {/* Footer Buttons */}
       <View style={styles.btnContainer}>
-        <Button title="add chore" color="#FFBD00" />
-        <Button title="family management" color="#FFBD00" />
-        <Button title="logout" color="#FFBD00" />
+        <Button title="Add Chore" color="#FFBD00" />
+        <Button
+          title="Go To Dashboard"
+          color="#FFBD00"
+          onPress={() =>
+            props.navigation.navigate({
+              routeName: "Dashboard",
+            })
+          }
+        />
+        {/* <Button title="logout" color="#FFBD00" /> */}
       </View>
     </KeyboardAvoidingView>
   );

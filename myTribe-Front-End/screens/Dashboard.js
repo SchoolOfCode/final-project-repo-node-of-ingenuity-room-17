@@ -8,6 +8,7 @@ import {
   Button,
   SafeAreaView,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 import dashImage from "../assets/dashImage.jpeg";
@@ -16,7 +17,6 @@ import manageFamily from "../assets/ManageFamily.png";
 import viewChores from "../assets/viewChores.png";
 import manageChores from "../assets/manageChores.png";
 import showStreak from "../assets/showStreak.png";
-import { TouchableHighlight } from "react-native-gesture-handler";
 
 const Dashboard = (props) => {
   return (
@@ -46,7 +46,7 @@ const Dashboard = (props) => {
       <ScrollView style={styles.container}>
         <View style={styles.buttonContainer}>
           {/* Link image to choreslist route */}
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() =>
               props.navigation.navigate({
                 routeName: "ChoreList",
@@ -58,9 +58,9 @@ const Dashboard = (props) => {
 
               <Text style={styles.mainButtonText}>View Chores</Text>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
           {/* Link to Addchores route */}
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() =>
               props.navigation.navigate({
                 routeName: "AddChores",
@@ -71,10 +71,10 @@ const Dashboard = (props) => {
               <Image style={styles.mainButtonImage} source={manageChores} />
               <Text style={styles.mainButtonText}>Manage Chores</Text>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
 
           {/* Link to Manage family route */}
-          <TouchableHighlight
+          <TouchableOpacity
             onPress={() =>
               props.navigation.navigate({
                 routeName: "Family",
@@ -85,7 +85,7 @@ const Dashboard = (props) => {
               <Image style={styles.mainButtonImage} source={manageFamily} />
               <Text style={styles.mainButtonText}>Manage Family</Text>
             </View>
-          </TouchableHighlight>
+          </TouchableOpacity>
           {/* Link to Show streak route  - NEEDS ADDING*/}
 
           <View style={styles.mainButton}>
