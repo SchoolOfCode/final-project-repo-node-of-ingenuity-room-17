@@ -45,6 +45,8 @@ const Dashboard = (props) => {
       {/* Main Content */}
       <ScrollView style={styles.container}>
         <View style={styles.buttonContainer}>
+
+        {/* Link image to choreslist route */}
           <TouchableHighlight
             onPress={() =>
               props.navigation.navigate({
@@ -58,14 +60,35 @@ const Dashboard = (props) => {
               <Text style={styles.mainButtonText}>View Chores</Text>
             </View>
           </TouchableHighlight>
+          {/* Link to Addchores route */}
+          <TouchableHighlight
+            onPress={() =>
+              props.navigation.navigate({
+                routeName: "AddChores",
+              })
+            }
+          >
           <View style={styles.mainButton}>
             <Image style={styles.mainButtonImage} source={manageChores} />
             <Text style={styles.mainButtonText}>Manage Chores</Text>
-          </View>
+          </View> 
+          </TouchableHighlight>
+
+            {/* Link to Manage family route */}
+            <TouchableHighlight
+            onPress={() =>
+              props.navigation.navigate({
+                routeName: "Family",
+              })
+            }
+          >
           <View style={styles.mainButton}>
             <Image style={styles.mainButtonImage} source={manageFamily} />
             <Text style={styles.mainButtonText}>Manage Family</Text>
           </View>
+          </TouchableHighlight>
+          {/* Link to Show streak route  - NEEDS ADDING*/}
+
           <View style={styles.mainButton}>
             <Image style={styles.mainButtonImage} source={showStreak} />
             <Text style={styles.mainButtonText}>Show Streak</Text>
