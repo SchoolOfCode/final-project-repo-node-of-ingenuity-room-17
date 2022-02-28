@@ -6,7 +6,7 @@ import Dashboard from "./screens/Dashboard";
 import ChoresNavigator from "./navigation/NavigationStack";
 
 export default function App() {
-  return <ChoresNavigator />;
+  return <Dashboard />;
 }
 
 const styles = StyleSheet.create({

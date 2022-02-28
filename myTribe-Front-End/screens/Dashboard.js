@@ -45,8 +45,7 @@ const Dashboard = (props) => {
       {/* Main Content */}
       <ScrollView style={styles.container}>
         <View style={styles.buttonContainer}>
-
-        {/* Link image to choreslist route */}
+          {/* Link image to choreslist route */}
           <TouchableHighlight
             onPress={() =>
               props.navigation.navigate({
@@ -68,24 +67,24 @@ const Dashboard = (props) => {
               })
             }
           >
-          <View style={styles.mainButton}>
-            <Image style={styles.mainButtonImage} source={manageChores} />
-            <Text style={styles.mainButtonText}>Manage Chores</Text>
-          </View> 
+            <View style={styles.mainButton}>
+              <Image style={styles.mainButtonImage} source={manageChores} />
+              <Text style={styles.mainButtonText}>Manage Chores</Text>
+            </View>
           </TouchableHighlight>
 
-            {/* Link to Manage family route */}
-            <TouchableHighlight
+          {/* Link to Manage family route */}
+          <TouchableHighlight
             onPress={() =>
               props.navigation.navigate({
                 routeName: "Family",
               })
             }
           >
-          <View style={styles.mainButton}>
-            <Image style={styles.mainButtonImage} source={manageFamily} />
-            <Text style={styles.mainButtonText}>Manage Family</Text>
-          </View>
+            <View style={styles.mainButton}>
+              <Image style={styles.mainButtonImage} source={manageFamily} />
+              <Text style={styles.mainButtonText}>Manage Family</Text>
+            </View>
           </TouchableHighlight>
           {/* Link to Show streak route  - NEEDS ADDING*/}
 
@@ -94,7 +93,9 @@ const Dashboard = (props) => {
             <Text style={styles.mainButtonText}>Show Streak</Text>
           </View>
         </View>
+        <Button title="Log Out" color="#FEB800" />
       </ScrollView>
+      {/* <View style={styles.btnContainer}></View> */}
     </View>
   );
 };
@@ -231,5 +232,15 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
     alignSelf: "center",
+  },
+  //LOGOUT BUTTON
+  btnContainer: {
+    fontWeight: "bold",
+    width: "100%",
+    height: 100,
+    fontSize: 20,
+    alignItems: "center",
+    marginTop: 30,
+    zIndex: 5,
   },
 });
