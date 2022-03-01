@@ -1,10 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
-import Streak from "./screens/Streak";
+import Dashboard from "./screens/Dashboard";
+import Login from "./screens/Login";
+import ChoresNavigator from "./navigation/NavigationStack";
 
 export default function App() {
-  return <Streak />;
+  return <ChoresNavigator />;
 }
 
 const styles = StyleSheet.create({

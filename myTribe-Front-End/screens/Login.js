@@ -8,12 +8,40 @@ import {
 	Button,
 	KeyboardAvoidingView,
 } from 'react-native';
+import { useState } from 'react';
 import bgImage from '../assets/main-background.jpeg';
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	signOut,
+} from 'firebase/auth';
+import { auth } from '../firebase/firebaseConfig';
+import authErrorCheck from '../utils/authErrorCheck';
+import { getFamily } from '../firebase/firestore';
 
-export default function Login() {
+export default function Login(props) {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
+
+	const handleSignIn = () => {
+		signInWithEmailAndPassword(auth, email, password).then(
+			(userCredentials) => {
+				const user = userCredentials.user;
+				getFamily(user.uid).then((res) => {
+					if (res[0].familyName === undefined) {
+						props.navigation.setParams({ routeName: 'Family' });
+						props.navigation.navigate('Family', { family: res[0] });
+					}
+					props.navigation.setParams({ routeName: 'Welcome' });
+					props.navigation.navigate('Welcome', { family: res[0] });
+				});
+			}
+		);
+	};
+
 	return (
 		<ImageBackground source={bgImage} style={styles.container}>
-			{/* <Text>Open up App.js to start working on your app!</Text> */}
 			<StatusBar color='white' style='light-content' />
 			<View style={styles.overlay}>
 				<View style={styles.header}>
@@ -27,15 +55,33 @@ export default function Login() {
 						style={styles.input}
 						placeholder='youremail@email.com'
 						placeholderTextColor={'black'}
+						onChangeText={(text) => setEmail(text)}
+						autoFocus
 					></TextInput>
 					<TextInput
 						style={[styles.input, styles.lastInput]}
 						placeholder='password'
 						placeholderTextColor={'black'}
+						onChangeText={(text) => setPassword(text)}
 						secureTextEntry
 					></TextInput>
-					<Button style={styles.btn} title='Login' color='white' />
-					<Button title='Create Account' color='white' />
+
+					<Text style={styles.error}>{error}</Text>
+					<Button
+						style={styles.btn}
+						title='Login'
+						color='white'
+						onPress={handleSignIn}
+					/>
+					<Button
+						title='Create Account'
+						color='white'
+						onPress={() =>
+							props.navigation.navigate({
+								routeName: 'SignUp',
+							})
+						}
+					/>
 				</KeyboardAvoidingView>
 			</View>
 		</ImageBackground>
@@ -83,5 +129,10 @@ const styles = StyleSheet.create({
 
 	lastInput: {
 		marginBottom: 20,
+	},
+	error: {
+		color: 'white',
+		textAlign: 'center',
+		marginBottom: 10,
 	},
 });

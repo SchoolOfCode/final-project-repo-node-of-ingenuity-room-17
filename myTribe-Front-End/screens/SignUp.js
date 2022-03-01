@@ -10,11 +10,48 @@ import {
 	KeyboardAvoidingView,
 	Dimensions,
 } from 'react-native';
+import { useState } from 'react';
 import headerImage from '../assets/header-background.jpeg';
-
+import {
+	createUserWithEmailAndPassword,
+	signInWithEmailAndPassword,
+	signOut,
+} from 'firebase/auth';
+import { auth } from '../firebase/firebaseConfig';
+import { addToDb } from '../firebase/firestore';
+import authErrorCheck from '../utils/authErrorCheck';
+import { DocumentReference } from 'firebase/firestore';
 const screenHeight = Dimensions.get('window').height;
 
-export default function SignUp() {
+export default function SignUp(props) {
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [error, setError] = useState('');
+
+	const handleSignUp = () => {
+		if (password === confirmPassword) {
+			createUserWithEmailAndPassword(auth, email, password)
+				.then((userCredentials) => {
+					const user = userCredentials.user;
+					const family = {
+						uid: user.uid,
+						members: [{ id: 1, name: name, isParent: true }],
+					};
+					addToDb(family).then((res) => {
+						props.navigation.setParams({ routeName: 'Family' });
+						props.navigation.navigate('Family', {
+							family: family,
+							docID: res,
+						});
+					});
+				})
+				.catch((error) => authErrorCheck(error, setError));
+			return;
+		}
+		setError('The passwords must match.');
+	};
 	return (
 		<KeyboardAvoidingView behavior='position' style={styles.container}>
 			<ScrollView contentContainerStyle={styles.scrollView}>
@@ -33,17 +70,35 @@ export default function SignUp() {
 				<View style={styles.registration}>
 					<Text style={styles.sectionHeading}>Sign Up</Text>
 					<Text style={styles.label}>Your name</Text>
-					<TextInput style={styles.input} />
+					<TextInput
+						onChangeText={(text) => {
+							setName(text);
+						}}
+						style={styles.input}
+					/>
 					<Text style={styles.label}>Email</Text>
-					<TextInput style={styles.input} />
+					<TextInput
+						onChangeText={(text) => setEmail(text)}
+						style={styles.input}
+					/>
 					<Text style={styles.label} secureTextEntry>
 						Password
 					</Text>
-					<TextInput style={styles.input} />
+					<TextInput
+						onChangeText={(text) => setPassword(text)}
+						style={styles.input}
+						secureTextEntry
+					/>
 					<Text style={styles.label}>Confirm password</Text>
-					<TextInput style={styles.input} secureTextEntry />
+					<TextInput
+						onChangeText={(text) => setConfirmPassword(text)}
+						style={styles.input}
+						secureTextEntry
+					/>
+					<Text style={styles.error}>{error}</Text>
 					<View style={styles.btnContainer}>
 						<Button
+							onPress={handleSignUp}
 							buttonStyle={styles.btn}
 							color='#FEB800'
 							title='continue'
@@ -125,5 +180,10 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		alignItems: 'flex-end',
 		marginTop: 30,
+	},
+	error: {
+		color: 'black',
+		textAlign: 'center',
+		marginBottom: 10,
 	},
 });

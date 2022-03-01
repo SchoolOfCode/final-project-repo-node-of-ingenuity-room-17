@@ -6,17 +6,24 @@ import {
 	ImageBackground,
 } from 'react-native';
 import UserThumbnail from '../components/UserThumbnail';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import headerImage from '../assets/welcome-background.jpeg';
 
 const Welcome = (props) => {
-	const [memberData, setMemberData] = useState([
-		{ id: 1, name: 'Jeff', isParent: true },
-		{ id: 2, name: 'Jeffa', isParent: true },
-		{ id: 3, name: 'Little Jeff', isParent: false },
-		{ id: 4, name: 'Curios Jeff', isParent: false },
-		{ id: 5, name: 'Mischievous Jeff', isParent: false },
-	]);
+	const [family, setFamily] = useState(false);
+
+	useEffect(() => {
+		const userFamily = props.navigation.getParam('family');
+		setFamily(userFamily);
+	}, []);
+
+	const selectHandler = (name) => {
+		props.navigation.setParams({ routeName: 'ChoreList' });
+		props.navigation.navigate('ChoreList', {
+			family: family,
+			member: name,
+		});
+	};
 	return (
 		<View style={styles.container}>
 			<ScrollView contentContainerStyle={styles.scrollView}>
@@ -36,13 +43,15 @@ const Welcome = (props) => {
 					<Text style={styles.sectionHeading}>
 						Please select your account
 					</Text>
-					{memberData.map((el) => (
-						<UserThumbnail
-							key={el.id}
-							name={el.name}
-							isParent={el.isParent}
-						/>
-					))}
+					{family &&
+						family.members.map((el) => (
+							<UserThumbnail
+								key={el.id}
+								name={el.name}
+								isParent={el.isParent}
+								selectHandler={selectHandler}
+							/>
+						))}
 				</View>
 			</ScrollView>
 		</View>

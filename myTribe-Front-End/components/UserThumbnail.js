@@ -1,15 +1,18 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import childAvatar from '../assets/child-avatar.png';
 import parentAvatar from '../assets/parent-avatar.png';
-const UserThumbnail = ({ isParent, name }) => {
+const UserThumbnail = ({ isParent, name, selectHandler }) => {
 	return (
-		<View style={styles.thumbnail}>
+		<TouchableOpacity
+			style={styles.thumbnail}
+			onPress={() => selectHandler(name)}
+		>
 			<Image
 				style={styles.imgThumbnail}
 				source={isParent ? parentAvatar : childAvatar}
 			/>
 			<Text>{name}</Text>
-		</View>
+		</TouchableOpacity>
 	);
 };
 
