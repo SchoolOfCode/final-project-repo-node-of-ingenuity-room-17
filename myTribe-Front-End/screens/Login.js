@@ -17,6 +17,7 @@ import {
 } from 'firebase/auth';
 import { auth } from '../firebase/firebaseConfig';
 import authErrorCheck from '../utils/authErrorCheck';
+import { getFamily } from '../firebase/firestore';
 
 export default function Login(props) {
 	const [email, setEmail] = useState('');
@@ -24,14 +25,19 @@ export default function Login(props) {
 	const [error, setError] = useState('');
 
 	const handleSignIn = () => {
-		signInWithEmailAndPassword(auth, email, password)
-			.then((userCredentials) => {
+		signInWithEmailAndPassword(auth, email, password).then(
+			(userCredentials) => {
 				const user = userCredentials.user;
-				console.log('User successfully logged in: ', user.uid);
-			})
-			.catch((error) => {
-				authErrorCheck(error, setError);
-			});
+				getFamily(user.uid).then((res) => {
+					if (res[0].familyName === undefined) {
+						props.navigation.setParams({ routeName: 'Family' });
+						props.navigation.navigate('Family', { family: res[0] });
+					}
+					props.navigation.setParams({ routeName: 'Welcome' });
+					props.navigation.navigate('Welcome', { family: res[0] });
+				});
+			}
+		);
 	};
 
 	return (

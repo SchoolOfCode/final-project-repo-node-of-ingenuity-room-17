@@ -13,10 +13,8 @@ import {
 
 import { useState, useEffect } from "react";
 import headerImage from "../assets/family-background.jpeg";
-import addUserIcon from "../assets/add-user-light.png";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import AddFamilyMember from "../components/AddFamilyMember";
-import addToDb from "../firebase/firestore";
+import { addToDb, getFamily, updateFamily } from "../firebase/firestore";
 
 const screenHeight = Dimensions.get("window").height;
 //TODO: change addImage when clicked to a remove icon so the user can remove the extra user that they added.
@@ -26,35 +24,52 @@ export default function Family(props) {
   const [familyName, setFamilyName] = useState("");
   const [members, setMembers] = useState([]);
   const [addMemberControls, setMemberControls] = useState(1);
+  const [docID, setDocID] = useState("");
 
   const addMemberHandler = () => {
-    console.log(addMemberControls);
     setMemberControls(addMemberControls + 1);
+  };
+
+  const addMember = (name, isParent) => {
+    let id = members[members.length - 1].id + 1;
+    const newMembers = [...members, { id: id, name: name, isParent: isParent }];
+    setMembers(newMembers);
   };
 
   const renderMemberControls = () => {
     const elements = [];
     for (let i = 0; i < addMemberControls; i++) {
       elements.push(
-        <AddFamilyMember key={i} pressHandler={addMemberHandler} />
+        <AddFamilyMember
+          key={i}
+          pressHandler={addMemberHandler}
+          addMember={addMember}
+        />
       );
     }
     return elements;
   };
 
   function continueHandler() {
-    const res = addToDb(family);
-    console.log(res);
+    const familyFinal = {
+      ...family,
+      familyName: familyName,
+      members: members,
+      docRef: docID,
+    };
+    updateFamily(familyFinal, docID);
+    setFamily(familyFinal);
+    props.navigation.setParams({ routeName: "ChoreList" });
+    props.navigation.navigate("ChoreList", {
+      family: familyFinal,
+    });
   }
 
   useEffect(() => {
-    if (!family) {
-      const newFamily = {
-        uid: props.navigation.getParam("uid"),
-        name: props.navigation.getParam("name"),
-      };
-      setFamily(newFamily);
-    }
+    const newFamily = props.navigation.getParam("family");
+    setFamily(newFamily);
+    setMembers(newFamily.members);
+    setDocID(props.navigation.getParam("docID"));
   }, []);
 
   return (
@@ -79,7 +94,6 @@ export default function Family(props) {
           >
             <Text style={styles.sectionHeading}>Family Details</Text>
             <Text style={styles.label}>Family Name</Text>
-
             <TextInput
               onChangeText={(text) => setFamilyName(text)}
               style={styles.input}
@@ -91,7 +105,6 @@ export default function Family(props) {
                 <Text style={styles.memberLabel}>Name</Text>
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
-
               {renderMemberControls()}
             </View>
           </ScrollView>
@@ -99,12 +112,7 @@ export default function Family(props) {
             <Button
               title="continue"
               color="#FEB800"
-              // onPress={continueHandler}
-              onPress={() =>
-                props.navigation.navigate({
-                  routeName: "Dashboard",
-                })
-              }
+              onPress={continueHandler}
             />
           </View>
         </KeyboardAvoidingView>

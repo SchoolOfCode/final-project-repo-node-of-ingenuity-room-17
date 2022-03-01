@@ -1,89 +1,84 @@
 import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  KeyboardAvoidingView,
-  ScrollView,
-} from "react-native";
-import { useState } from "react";
-import Chore from "../components/Chore";
+	StyleSheet,
+	Text,
+	View,
+	Button,
+	KeyboardAvoidingView,
+	ScrollView,
+} from 'react-native';
+import { useState, useEffect } from 'react';
+import Chore from '../components/Chore';
+import getDateDisplay from '../utils/date';
 
 export default function ChoreList(props) {
-  const [chores, setChores] = useState([
-    {
-      id: 1,
-      title: "Tidy room",
-      member: "Jeff",
-      description: "Lorem ipsum lorem lorem ipsum lorem ipsum lorem",
-      dueDate: "21.02.2022",
-    },
-    {
-      id: 2,
-      title: "Tidy room",
-      member: "Jeff",
-      description: "Lorem ipsum lorem lorem ipsum lorem ipsum lorem",
-      dueDate: "21.02.2022",
-    },
-    {
-      id: 3,
-      title: "Tidy room",
-      member: "Jeff",
-      description: "Lorem ipsum lorem lorem ipsum lorem ipsum lorem",
-      dueDate: "21.02.2022",
-    },
-    {
-      id: 4,
-      title: "Tidy room",
-      member: "Jeff",
-      description: "Lorem ipsum lorem lorem ipsum lorem ipsum lorem",
-      dueDate: "21.02.2022",
-    },
-    {
-      id: 5,
-      title: "Tidy room",
-      member: "Jeff",
-      description: "Lorem ipsum lorem lorem ipsum lorem ipsum lorem",
-      dueDate: "21.02.2022",
-    },
-  ]);
-  return (
-    <KeyboardAvoidingView style={styles.container}>
-      <Text style={styles.heading}>This week's chores</Text>
-      <Text style={styles.date}>21st February 2022</Text>
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
-        {chores.map((el) => (
-          <Chore
-            key={el.id}
-            title={el.title}
-            member={el.member}
-            description={el.description}
-            dueDate={el.dueDate}
-          />
-        ))}
-      </ScrollView>
-      <View style={styles.btnContainer}>
-        <Button
-          title="Add Chore"
-          color="#FFBD00"
-          onPress={() =>
-            props.navigation.navigate({
-              routeName: "AddChores",
-            })
-          }
-        />
-        <Button
-          title="Go To Dashboard"
-          color="#FFBD00"
-          onPress={() =>
-            props.navigation.navigate({
-              routeName: "Dashboard",
-            })
-          }
-        />
-      </View>
-    </KeyboardAvoidingView>
-  );
+	const [chores, setChores] = useState([]);
+	const [family, setFamily] = useState(false);
+	const [currentMember, setCurrentMember] = useState(false);
+	const [date, setDate] = useState(false);
+
+	const addFamilyChoresHandler = () => {
+		props.navigation.setParams({ routename: 'AddChores' });
+		props.navigation.navigate('AddChores', {
+			family: family,
+			member: currentMember,
+			date: date,
+		});
+	};
+
+	const familyManagementHandler = () => {
+		props.navigation.navigate({ routeName: 'Family' });
+	};
+
+	useEffect(() => {
+		const newFamily = props.navigation.getParam('family');
+		setFamily(newFamily);
+		setCurrentMember(newFamily.members[0].name);
+		if (newFamily.chores !== undefined) {
+			setChores(newFamily.chores);
+		}
+		setDate(getDateDisplay());
+	});
+
+	return (
+		<KeyboardAvoidingView style={styles.container}>
+			<Text style={styles.heading}>
+				{currentMember && `${currentMember}'s chores`}
+			</Text>
+			<Text style={styles.date}>{date && date}</Text>
+			<ScrollView
+				showsVerticalScrollIndicator={false}
+				style={styles.choreList}
+			>
+				{chores.length > 0 ? (
+					chores.map((el) => (
+						<Chore
+							key={el.id}
+							title={el.title}
+							member={el.member}
+							description={el.description}
+							dueDate={el.dueDate}
+						/>
+					))
+				) : (
+					<Text>You haven't added any chores.</Text>
+				)}
+			</ScrollView>
+			<View style={styles.btnContainer}>
+				<Button
+					title='add chore'
+					color='#FFBD00'
+					onPress={addFamilyChoresHandler}
+				/>
+				<Button
+					onPress={familyManagementHandler}
+					title='family management'
+					color='#FFBD00'
+				/>
+				<Button title='logout' color='#FFBD00' />
+			</View>
+		</KeyboardAvoidingView>
+	);
+>>>>>>> main
 }
 
 const styles = StyleSheet.create({
