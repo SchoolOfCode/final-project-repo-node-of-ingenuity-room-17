@@ -21,6 +21,7 @@ export default function AddChores(props) {
 	const [choreMember, setChoreMember] = useState('');
 	const [choreDueDate, setChoreDueDate] = useState('');
 
+
 	const [displayDate, setDisplayDate] = useState(false);
 	const [calendarDate, setCalendarDate] = useState(false);
 	const [currentMember, setCurrentMember] = useState(false);
@@ -28,6 +29,7 @@ export default function AddChores(props) {
 	const [chore, setChore] = useState(false);
 	const [show, setShow] = useState(false);
 	const [text, setText] = useState('');
+
 
 	// MODAL USE STATES
 	const [chooseData, setChooseData] = useState('Assign to...');
@@ -51,6 +53,80 @@ export default function AddChores(props) {
 		setChoreDueDate(formDate);
 	};
 
+<<<<<<< HEAD
+    setText(formDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(!show);
+    setMode(currentMode);
+  };
+
+  return (
+    <KeyboardAvoidingView style={styles.container}>
+      {/* Top Bar */}
+      <Text style={styles.heading}>This week's chores</Text>
+      <Text style={styles.date}>Current Date</Text>
+      {/* Main Content */}
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
+        <Text style={styles.subheading}>Chore Name</Text>
+        <TextInput style={styles.input}></TextInput>
+        <Text style={styles.subheading}>Description</Text>
+        <TextInput style={styles.input}></TextInput>
+        {/* Date Picker Button */}
+        <Button
+          title="Due Date"
+          style={styles.subheading}
+          color={styles.date}
+          onPress={() => showMode("date")}
+        ></Button>
+        {/* This allows the button to render the date */}
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display="default"
+            onChange={onChange}
+          />
+        )}
+        {/* Modal Dropdown */}
+        <TouchableOpacity
+          style={styles.touchableOpacity}
+          onPress={() => changeModalVisible(true)}
+        >
+          <Text style={styles.text}>{chooseData}</Text>
+        </TouchableOpacity>
+        <Modal
+          transparent={true}
+          animationType="fade"
+          visible={isModalVisible}
+          nRequestClose={() => changeModalVisible(false)}
+        >
+          <ModalPicker
+            changeModalVisible={changeModalVisible}
+            setData={setData}
+          />
+        </Modal>
+      </ScrollView>
+      {/* Footer Buttons */}
+      <View style={styles.btnContainer}>
+        <Button title="Add Chore" color="#FFBD00" />
+        <Button
+          title="Go To Dashboard"
+          color="#FFBD00"
+          onPress={() =>
+            props.navigation.navigate({
+              routeName: "Dashboard",
+            })
+          }
+        />
+        {/* <Button title="logout" color="#FFBD00" /> */}
+      </View>
+    </KeyboardAvoidingView>
+  );
+=======
 	const addChoreHandler = () => {
 		let id;
 		if (!family.chores || family.chores.length < 1) {
@@ -163,6 +239,7 @@ export default function AddChores(props) {
 			</View>
 		</KeyboardAvoidingView>
 	);
+>>>>>>> main
 }
 const styles = StyleSheet.create({
 	container: {

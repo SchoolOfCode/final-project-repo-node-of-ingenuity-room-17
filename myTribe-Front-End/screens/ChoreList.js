@@ -78,34 +78,35 @@ export default function ChoreList(props) {
 			</View>
 		</KeyboardAvoidingView>
 	);
+>>>>>>> main
 }
 
 const styles = StyleSheet.create({
-	container: {
-		height: '100%',
-		width: '100%',
-		paddingTop: 100,
-		paddingBottom: 50,
-		paddingLeft: 50,
-		paddingRight: 50,
-		backgroundColor: '#F2F0F0',
-	},
+  container: {
+    height: "100%",
+    width: "100%",
+    paddingTop: 100,
+    paddingBottom: 50,
+    paddingLeft: 50,
+    paddingRight: 50,
+    backgroundColor: "#F2F0F0",
+  },
 
-	heading: {
-		fontSize: 30,
-		fontWeight: 'bold',
-	},
+  heading: {
+    fontSize: 30,
+    fontWeight: "bold",
+  },
 
-	date: {
-		color: '#AAAAAC',
-	},
+  date: {
+    color: "#AAAAAC",
+  },
 
-	choreList: {
-		marginTop: 50,
-	},
+  choreList: {
+    marginTop: 50,
+  },
 
-	btnContainer: {
-		paddingTop: 10,
-		paddingBottom: 10,
-	},
+  btnContainer: {
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
 });
