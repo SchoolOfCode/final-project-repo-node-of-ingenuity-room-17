@@ -3,6 +3,8 @@ import { StyleSheet, View } from "react-native";
 import { useState } from "react";
 import Dashboard from "./screens/Dashboard";
 import Login from "./screens/Login";
+import Streak from "./screens/Streak";
+
 import ChoresNavigator from "./navigation/NavigationStack";
 
 export default function App() {

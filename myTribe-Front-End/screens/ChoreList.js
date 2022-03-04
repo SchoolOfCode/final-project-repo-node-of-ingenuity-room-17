@@ -25,12 +25,19 @@ export default function ChoreList(props) {
     });
   };
 
-  const familyManagementHandler = () => {
-    props.navigation.navigate({ routeName: "Family" });
+  // console.log(props.navigation.getParam("family"));
+
+  const dashboardHandler = (name) => {
+    props.navigation.setParams({ routeName: "Dashboard" });
+    props.navigation.navigate("Dashboard", {
+      family: family,
+      member: name,
+    });
   };
 
   useEffect(() => {
     const newFamily = props.navigation.getParam("family");
+    // console.log(newFamily);
     setFamily(newFamily);
     setCurrentMember(newFamily.members[0].name);
     if (newFamily.chores !== undefined) {
@@ -62,16 +69,15 @@ export default function ChoreList(props) {
       </ScrollView>
       <View style={styles.btnContainer}>
         <Button
-          title="add chore"
+          title="Add Chore"
           color="#FFBD00"
           onPress={addFamilyChoresHandler}
         />
         <Button
-          onPress={familyManagementHandler}
-          title="family management"
+          onPress={dashboardHandler}
+          title="View Dashboard"
           color="#FFBD00"
         />
-        <Button title="logout" color="#FFBD00" />
       </View>
     </KeyboardAvoidingView>
   );

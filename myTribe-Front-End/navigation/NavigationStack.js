@@ -7,6 +7,7 @@ import Login from "../screens/Login.js";
 import SignUp from "../screens/SignUp.js";
 import Welcome from "../screens/Welcome.js";
 import Dashboard from "../screens/Dashboard.js";
+import Streak from "../screens/Streak";
 
 const ChoresNavigator = createStackNavigator(
   {
@@ -18,6 +19,7 @@ const ChoresNavigator = createStackNavigator(
     ChoreList: ChoreList,
     Family: Family,
     Dashboard: Dashboard,
+    Streak: Streak,
   },
   {
     headerMode: "none",
