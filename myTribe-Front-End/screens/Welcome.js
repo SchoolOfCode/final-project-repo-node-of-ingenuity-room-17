@@ -26,7 +26,9 @@ const Welcome = (props) => {
 	};
 	return (
 		<View style={styles.container}>
-			<ScrollView contentContainerStyle={styles.scrollView}>
+			<ScrollView 
+			testID="scrollViewWelcome"
+			contentContainerStyle={styles.scrollView}>
 				<ImageBackground
 					resizeMode='cover'
 					style={styles.header}

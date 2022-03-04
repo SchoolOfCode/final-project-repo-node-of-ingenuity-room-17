@@ -52,6 +52,7 @@ export default function Login(props) {
 				</View>
 				<KeyboardAvoidingView behavior='padding' style={styles.authBox}>
 					<TextInput
+						accessibilityLabel='email'
 						style={styles.input}
 						placeholder='youremail@email.com'
 						placeholderTextColor={'black'}
@@ -59,6 +60,7 @@ export default function Login(props) {
 						autoFocus
 					></TextInput>
 					<TextInput
+					accessibilityLabel='password'
 						style={[styles.input, styles.lastInput]}
 						placeholder='password'
 						placeholderTextColor={'black'}
@@ -68,9 +70,13 @@ export default function Login(props) {
 
 					<Text style={styles.error}>{error}</Text>
 					<Button
+					accessibilityRole={'login-button'}
+  					accessibilityLabel={'login-button'}
+					  testID="login"
 						style={styles.btn}
 						title='Login'
 						color='white'
+						accessibilityRole='Login'
 						onPress={handleSignIn}
 					/>
 					<Button

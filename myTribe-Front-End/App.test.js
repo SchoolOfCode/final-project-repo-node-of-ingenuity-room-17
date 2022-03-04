@@ -28,4 +28,4 @@ it('Find text element', ()=>{
  
    expect(findTextElement(tree, 'Hello World!')).toBeDefined();
 })
-});
+})

@@ -45,7 +45,8 @@ export default function ChoreList(props) {
         {currentMember && `${currentMember}'s chores`}
       </Text>
       <Text style={styles.date}>{date && date}</Text>
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
+      <ScrollView 
+      showsVerticalScrollIndicator={false} style={styles.choreList}>
         {chores.length > 0 ? (
           chores.map((el) => (
             <Chore
@@ -62,6 +63,7 @@ export default function ChoreList(props) {
       </ScrollView>
       <View style={styles.btnContainer}>
         <Button
+        accessibilityLabel='addChore'
           title="add chore"
           color="#FFBD00"
           onPress={addFamilyChoresHandler}
