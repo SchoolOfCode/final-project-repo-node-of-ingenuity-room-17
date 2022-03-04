@@ -10,7 +10,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import dashImage from "../assets/dashImage.jpeg";
 import flame from "../assets/fire-streak.png";
 import manageFamily from "../assets/ManageFamily.png";
@@ -20,10 +20,28 @@ import showStreak from "../assets/showStreak.png";
 import AddChores from "./AddChores";
 
 const Dashboard = (props) => {
+  const [family, setFamily] = useState("");
+  const [members, setMembers] = useState("");
+  const [doc, setDocID] = useState("");
+  useEffect(() => {
+    const newFamily = props.navigation.getParam("family");
+    setFamily(newFamily);
+    setMembers(newFamily.members);
+    setDocID(props.navigation.getParam("docID"));
+  }, []);
+
   function addChoresHandler(name) {
     props.navigation.setParams({ routeName: "AddChores" });
     props.navigation.navigate("AddChores", {
-      family: familyName,
+      family: family,
+      member: name,
+    });
+  }
+
+  function addFamilyHandler(name) {
+    props.navigation.setParams({ routeName: "Family" });
+    props.navigation.navigate("Family", {
+      family: family,
       member: name,
     });
   }
@@ -79,7 +97,7 @@ const Dashboard = (props) => {
           </TouchableOpacity>
 
           {/* Link to Manage family route */}
-          <TouchableOpacity>
+          <TouchableOpacity onPress={addFamilyHandler}>
             <View style={styles.mainButton}>
               <Image style={styles.mainButtonImage} source={manageFamily} />
               <Text style={styles.mainButtonText}>Manage Family</Text>
