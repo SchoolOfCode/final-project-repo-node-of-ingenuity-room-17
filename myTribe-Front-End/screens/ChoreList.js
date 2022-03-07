@@ -6,15 +6,22 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Chore from "../components/Chore";
 import getDateDisplay from "../utils/date";
+import {pageState} from "../App"
 
 export default function ChoreList(props) {
+
+  console.log("page state:", pageState)
+const {state, setState} = useContext(pageState)
+console.log("context", state)
+
   const [chores, setChores] = useState([]);
   const [family, setFamily] = useState(false);
   const [currentMember, setCurrentMember] = useState(false);
   const [date, setDate] = useState(false);
+  const [addChoreCalled, setAddChoreCalled] = useState(false)
 
   const addFamilyChoresHandler = () => {
     props.navigation.setParams({ routename: "AddChores" });
@@ -22,10 +29,37 @@ export default function ChoreList(props) {
       family: family,
       member: currentMember,
       date: date,
+     
     });
   };
 
-  // console.log(props.navigation.getParam("family"));
+  // function addChoreToggler(){
+  //   setAddChoreCalled(!addChoreCalled)
+  // }
+
+  const completeChore = (id) => {
+    // const choreId = chores.findIndex((el) => el.id === id);
+    // const newChore = chores[choreId];
+    // const newChores = [
+    //   chores.splice(0, choreId),
+    //   { ...newChore, isComplete: true },
+    //   chores.splice(choreId + 1),
+    // ];
+    // console.log("updated chores:", newChores);
+    // setChores(newChores);
+    console.log("completed chore fired");
+    const choreCopy = [...chores];
+    const completedChore = choreCopy.find((el) => el.id === id);
+    let updatedChores = [];
+    if (completedChore.id === 1) {
+      updatedChores = [
+        { ...completedChore, isComplete: true },
+        ...choreCopy.slice(1),
+      ];
+    }
+    console.log("updated chores:", updatedChores);
+    setChores(updatedChores);
+  };
 
   const dashboardHandler = (name) => {
     props.navigation.setParams({ routeName: "Dashboard" });
@@ -37,6 +71,7 @@ export default function ChoreList(props) {
 
   useEffect(() => {
     const newFamily = props.navigation.getParam("family");
+    console.log('use Effect called')
     // console.log(newFamily);
     setFamily(newFamily);
     setCurrentMember(newFamily.members[0].name);
@@ -44,7 +79,7 @@ export default function ChoreList(props) {
       setChores(newFamily.chores);
     }
     setDate(getDateDisplay());
-  });
+  }, []);
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -53,19 +88,40 @@ export default function ChoreList(props) {
       </Text>
       <Text style={styles.date}>{date && date}</Text>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
-        {chores.length > 0 ? (
-          chores.map((el) => (
-            <Chore
-              key={el.id}
-              title={el.title}
-              member={el.member}
-              description={el.description}
-              dueDate={el.dueDate}
-            />
-          ))
-        ) : (
-          <Text>You haven't added any chores.</Text>
-        )}
+        <Text>In Progress:</Text>
+        {chores.length > 0 &&
+          chores.map((el) => {
+            if (!el.isComplete) {
+              console.log('incomplete element:', el)
+              return (
+                <Chore
+                  key={el.id}
+                  title={el.title}
+                  member={el.member}
+                  description={el.description}
+                  dueDate={el.dueDate}
+                  id={el.id}
+                  completeChore={completeChore}
+                />
+              );
+            }
+          })}
+        <Text>Completed:</Text>
+        {chores.length > 0 &&
+          chores.map((el) => {
+            if (el.isComplete) {
+              return (
+                <Chore
+                  key={el.id}
+                  title={el.title}
+                  member={el.member}
+                  description={el.description}
+                  dueDate={el.dueDate}
+                  id={el.id}
+                />
+              );
+            }
+          })}
       </ScrollView>
       <View style={styles.btnContainer}>
         <Button

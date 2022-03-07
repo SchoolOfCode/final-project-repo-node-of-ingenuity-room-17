@@ -76,6 +76,7 @@ export default function AddChores(props) {
       };
     }
     updateFamily(finalFamily, finalFamily.docRef);
+ 
     props.navigation.setParams({ routeName: "ChoreList" });
     props.navigation.navigate("ChoreList", { family: finalFamily });
   };
@@ -92,6 +93,7 @@ export default function AddChores(props) {
     const modalMembers = family.members.map((el) => el.name);
     setMembers(modalMembers);
     setFamily(family);
+  
   }, []);
   return (
     <KeyboardAvoidingView style={styles.container}>
