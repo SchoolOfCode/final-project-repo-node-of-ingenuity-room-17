@@ -11,8 +11,8 @@ import ChoresNavigator from "./navigation/NavigationStack";
 export let pageState = React.createContext({})
 
 export default function App() {
-  const [state, setState] = useState('test 1245')
-  return <pageState.Provider value={{state, setState}}>
+  const [family, setFamily] = useState({})
+  return <pageState.Provider value={{family, setFamily}}>
   <ChoresNavigator />
   </pageState.Provider>;
 

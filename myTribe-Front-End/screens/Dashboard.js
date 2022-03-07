@@ -10,7 +10,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import dashImage from "../assets/dashImage.jpeg";
 import flame from "../assets/fire-streak.png";
 import manageFamily from "../assets/ManageFamily.png";
@@ -18,17 +18,18 @@ import viewChores from "../assets/viewChores.png";
 import manageChores from "../assets/manageChores.png";
 import showStreak from "../assets/showStreak.png";
 import AddChores from "./AddChores";
+import {pageState} from "../App"
 
 const Dashboard = (props) => {
-  const [family, setFamily] = useState("");
-  const [members, setMembers] = useState("");
-  const [doc, setDocID] = useState("");
-  useEffect(() => {
-    const newFamily = props.navigation.getParam("family");
-    setFamily(newFamily);
-    setMembers(newFamily.members);
-    setDocID(props.navigation.getParam("docID"));
-  }, []);
+  const {family, setFamily} = useContext(pageState)
+  // const [members, setMembers] = useState("");
+  // const [doc, setDocID] = useState("");
+  // useEffect(() => {
+  //   const newFamily = props.navigation.getParam("family");
+  //   setFamily(newFamily);
+  //   setMembers(newFamily.members);
+  //   setDocID(props.navigation.getParam("docID"));
+  // }, []);
 
   function addChoresHandler(name) {
     props.navigation.setParams({ routeName: "AddChores" });

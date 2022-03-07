@@ -6,23 +6,21 @@ import {
   ImageBackground,
 } from "react-native";
 import UserThumbnail from "../components/UserThumbnail";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import headerImage from "../assets/welcome-background.jpeg";
+import {pageState} from "../App"
 
 const Welcome = (props) => {
-  const [family, setFamily] = useState(false);
+  const {family, setFamily} = useContext(pageState)
 
-  useEffect(() => {
-    const userFamily = props.navigation.getParam("family");
-    setFamily(userFamily);
-  }, []);
+  // useEffect(() => {
+  //   const userFamily = props.navigation.getParam("family");
+  //   setFamily(userFamily);
+  // }, []);
 
   const selectHandler = (name) => {
-    props.navigation.setParams({ routeName: "ChoreList" });
-    props.navigation.navigate("ChoreList", {
-      family: family,
-      member: name,
-    });
+    setFamily({...family, memberSession: name})
+    props.navigation.navigate({ routeName: "Dashboard" });
   };
   return (
     <View style={styles.container}>

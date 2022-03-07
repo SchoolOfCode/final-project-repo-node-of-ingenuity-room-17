@@ -8,7 +8,7 @@ import {
   Button,
   KeyboardAvoidingView,
 } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import bgImage from "../assets/main-background.jpeg";
 import {
   createUserWithEmailAndPassword,
@@ -18,23 +18,25 @@ import {
 import { auth } from "../firebase/firebaseConfig";
 import authErrorCheck from "../utils/authErrorCheck";
 import { getFamily } from "../firebase/firestore";
+import {pageState} from "../App"
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const {family, setFamily} = useContext(pageState)
+
   const handleSignIn = () => {
     signInWithEmailAndPassword(auth, email, password).then(
       (userCredentials) => {
         const user = userCredentials.user;
         getFamily(user.uid).then((res) => {
+          setFamily(res[0])
           if (res[0].familyName === undefined) {
-            props.navigation.setParams({ routeName: "Family" });
-            props.navigation.navigate("Family", { family: res[0] });
+            props.navigation.navigate({ routeName: "Family" });
           }
-          props.navigation.setParams({ routeName: "Welcome" });
-          props.navigation.navigate("Welcome", { family: res[0] });
+          props.navigation.navigate({ routeName: "Welcome" });
         });
       }
     );
