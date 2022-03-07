@@ -10,15 +10,45 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import dashImage from "../assets/dashImage.jpeg";
 import flame from "../assets/fire-streak.png";
 import manageFamily from "../assets/ManageFamily.png";
 import viewChores from "../assets/viewChores.png";
 import manageChores from "../assets/manageChores.png";
 import showStreak from "../assets/showStreak.png";
+import AddChores from "./AddChores";
+import {pageState} from "../App"
 
 const Dashboard = (props) => {
+  const {family, setFamily} = useContext(pageState)
+  // const [members, setMembers] = useState("");
+  // const [doc, setDocID] = useState("");
+  // useEffect(() => {
+  //   const newFamily = props.navigation.getParam("family");
+  //   setFamily(newFamily);
+  //   setMembers(newFamily.members);
+  //   setDocID(props.navigation.getParam("docID"));
+  // }, []);
+
+  function addChoresHandler(name) {
+    props.navigation.setParams({ routeName: "AddChores" });
+    props.navigation.navigate("AddChores", {
+      family: family,
+      member: name,
+    });
+  }
+
+  function addFamilyHandler(name) {
+    props.navigation.setParams({ routeName: "Family" });
+    props.navigation.navigate("Family", {
+      family: family,
+      member: name,
+    });
+  }
+
+  console.log(props.navigation.getParam("family"));
+
   return (
     <View style={{ flex: 1 }}>
       {/* Top Image */}
@@ -29,7 +59,7 @@ const Dashboard = (props) => {
       >
         <View style={styles.overlay}>
           <Text style={styles.heading}>Dashboard</Text>
-          <Text style={styles.subHeading}>Emma</Text>
+          <Text style={styles.subHeading}></Text>
         </View>
         {/* Status Bar */}
         <View style={[styles.statusBlock, { zIndex: 2 }]}>
@@ -60,13 +90,7 @@ const Dashboard = (props) => {
             </View>
           </TouchableOpacity>
           {/* Link to Addchores route */}
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate({
-                routeName: "AddChores",
-              })
-            }
-          >
+          <TouchableOpacity onPress={addChoresHandler}>
             <View style={styles.mainButton}>
               <Image style={styles.mainButtonImage} source={manageChores} />
               <Text style={styles.mainButtonText}>Manage Chores</Text>
@@ -74,26 +98,35 @@ const Dashboard = (props) => {
           </TouchableOpacity>
 
           {/* Link to Manage family route */}
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate({
-                routeName: "Family",
-              })
-            }
-          >
+          <TouchableOpacity onPress={addFamilyHandler}>
             <View style={styles.mainButton}>
               <Image style={styles.mainButtonImage} source={manageFamily} />
               <Text style={styles.mainButtonText}>Manage Family</Text>
             </View>
           </TouchableOpacity>
           {/* Link to Show streak route  - NEEDS ADDING*/}
-
-          <View style={styles.mainButton}>
-            <Image style={styles.mainButtonImage} source={showStreak} />
-            <Text style={styles.mainButtonText}>Show Streak</Text>
-          </View>
+          <TouchableOpacity
+            onPress={() =>
+              props.navigation.navigate({
+                routeName: "Streak",
+              })
+            }
+          >
+            <View style={styles.mainButton}>
+              <Image style={styles.mainButtonImage} source={showStreak} />
+              <Text style={styles.mainButtonText}>Show Streak</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-        <Button title="Log Out" color="#FEB800" />
+        <Button
+          title="Log Out"
+          color="#FEB800"
+          onPress={() =>
+            props.navigation.navigate({
+              routeName: "Login",
+            })
+          }
+        />
       </ScrollView>
       {/* <View style={styles.btnContainer}></View> */}
     </View>
@@ -166,7 +199,7 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontWeight: "bold",
-    paddingTop: 20,
+    paddingTop: 15,
     textAlign: "center",
     fontSize: 20,
   },
@@ -177,8 +210,8 @@ const styles = StyleSheet.create({
     color: "#FEB800",
   },
   flame: {
-    height: "70%",
-    width: "80%",
+    height: "65%",
+    width: "70%",
   },
 
   // MAIN CONTENT

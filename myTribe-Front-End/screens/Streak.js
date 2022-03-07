@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
 import { useState } from "react";
 import streak from "../assets/fire-streak.png";
 
-const Streak = () => {
+const Streak = (props) => {
   const [count, setCount] = useState(0);
 
   const handleIncrement = () => {
@@ -14,7 +14,7 @@ const Streak = () => {
     <View style={styles.container}>
       <ImageBackground resizeMode="cover" style={styles.streak} source={streak}>
         <View style={styles.streakOverlay}>
-          {/* <Text style={styles.streakText}>3</Text> */}
+          <Text style={styles.streakText}>{count}</Text>
         </View>
       </ImageBackground>
       <Text style={styles.heading} onPress={handleIncrement}>
@@ -25,7 +25,15 @@ const Streak = () => {
         Complete your chores everyday to build your streak!
       </Text>
       <View style={styles.btnContainer}>
-        <Button title="Back to Home" color="#FFBD00" />
+        <Button
+          onPress={() =>
+            props.navigation.navigate({
+              routeName: "Dashboard",
+            })
+          }
+          title="Back to Dashboard"
+          color="#FFBD00"
+        />
       </View>
     </View>
   );
@@ -61,12 +69,16 @@ const styles = StyleSheet.create({
   },
 
   streakText: {
-    fontSize: 30,
+    fontSize: 90,
     fontWeight: "bold",
     justifyContent: "center",
     height: "100%",
     width: "100%",
     paddingRight: 50,
+    position: "absolute",
+    textAlign: "center",
+
+    top: 170,
   },
 
   //Image
