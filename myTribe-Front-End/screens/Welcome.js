@@ -18,6 +18,7 @@ const Welcome = (props) => {
   //   setFamily(userFamily);
   // }, []);
 
+
   const selectHandler = (name) => {
     setFamily({...family, memberSession: name})
     props.navigation.navigate({ routeName: "Dashboard" });
@@ -52,6 +53,7 @@ const Welcome = (props) => {
       </ScrollView>
     </View>
   );
+
 };
 const styles = StyleSheet.create({
   container: {

@@ -145,7 +145,9 @@ export default function AddChores(props) {
         </Modal>
       </ScrollView>
       <View style={styles.btnContainer}>
-        <Button title="add chore" color="#FFBD00" onPress={addChoreHandler} />
+        <Button 
+        accessibilityLabel='AddChoreButton'
+        title="add chore" color="#FFBD00" onPress={addChoreHandler} />
         <Button
           title="back"
           color="#FFBD00"

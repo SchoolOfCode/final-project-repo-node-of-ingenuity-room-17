@@ -80,6 +80,7 @@ const updatedFamily = {...familyCopy, chores: updatedChores}
         {family.memberSession && `${family.memberSession}'s chores`}
       </Text>
       <Text style={styles.date}>{date && date}</Text>
+
       <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
         <Text>In Progress:</Text>
         {family.chores.length > 0 &&

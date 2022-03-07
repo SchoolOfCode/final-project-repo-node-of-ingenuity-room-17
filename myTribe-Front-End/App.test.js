@@ -16,4 +16,6 @@ describe("App created", () => {
     const tree = renderer.create(<App />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+
 });
+

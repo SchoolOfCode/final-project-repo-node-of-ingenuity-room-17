@@ -71,6 +71,7 @@ export default function SignUp(props) {
 					<Text style={styles.sectionHeading}>Sign Up</Text>
 					<Text style={styles.label}>Your name</Text>
 					<TextInput
+					testID="textInput"
 						onChangeText={(text) => {
 							setName(text);
 						}}
