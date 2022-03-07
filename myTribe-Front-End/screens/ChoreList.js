@@ -6,74 +6,127 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Chore from "../components/Chore";
 import getDateDisplay from "../utils/date";
+import {pageState} from "../App"
+import { updateFamily } from "../firebase/firestore";
 
 export default function ChoreList(props) {
-  const [chores, setChores] = useState([]);
-  const [family, setFamily] = useState(false);
-  const [currentMember, setCurrentMember] = useState(false);
+
+const {family, setFamily} = useContext(pageState)
+
+
+  // const [chores, setChores] = useState([]);
+  // const [family, setFamily] = useState(false);
+  // const [currentMember, setCurrentMember] = useState(false);
   const [date, setDate] = useState(false);
+  // const [addChoreCalled, setAddChoreCalled] = useState(false)
 
   const addFamilyChoresHandler = () => {
-    props.navigation.setParams({ routename: "AddChores" });
-    props.navigation.navigate("AddChores", {
+    props.navigation.navigate({ routename: "AddChores" });
+  };
+
+  // function addChoreToggler(){
+  //   setAddChoreCalled(!addChoreCalled)
+  // }
+
+  const completeChore = (id) => {
+    // console.log("family chores:", family.chores)
+    
+    const familyCopy = {...family};
+    const completedChore = familyCopy.chores.find((el) => el.id === id);
+    let updatedChores = [];
+    if (completedChore.id === 1) {
+      updatedChores = [
+        { ...completedChore, isComplete: true },
+        ...familyCopy.chores.slice(1),
+      ];
+    } else {
+      updatedChores = [...familyCopy.chores.slice(0, completedChore.id - 1), {...completedChore, isComplete: true} , ...familyCopy.chores.slice(completedChore.id)
+      ]
+    }
+    console.log("updated chores:", updatedChores)
+    console.log("family chores:", family.chores)
+const updatedFamily = {...familyCopy, chores: updatedChores}
+    setFamily(updatedFamily);
+    updateFamily(updatedFamily, updatedFamily.docRef);
+    console.log("updated family", updatedFamily.docRef)
+  };
+
+  const dashboardHandler = (name) => {
+    props.navigation.setParams({ routeName: "Dashboard" });
+    props.navigation.navigate("Dashboard", {
       family: family,
-      member: currentMember,
-      date: date,
+      member: name,
     });
   };
 
-  const familyManagementHandler = () => {
-    props.navigation.navigate({ routeName: "Family" });
-  };
-
-  useEffect(() => {
-    const newFamily = props.navigation.getParam("family");
-    setFamily(newFamily);
-    setCurrentMember(newFamily.members[0].name);
-    if (newFamily.chores !== undefined) {
-      setChores(newFamily.chores);
-    }
-    setDate(getDateDisplay());
-  });
+  // useEffect(() => {
+  //   const newFamily = props.navigation.getParam("family");
+  //   console.log('use Effect called')
+  //   // console.log(newFamily);
+  //   setFamily(newFamily);
+  //   setCurrentMember(newFamily.members[0].name);
+  //   if (newFamily.chores !== undefined) {
+  //     setChores(newFamily.chores);
+  //   }
+  //   setDate(getDateDisplay());
+  // }, []);
 
   return (
     <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.heading}>
-        {currentMember && `${currentMember}'s chores`}
+        {family.memberSession && `${family.memberSession}'s chores`}
       </Text>
       <Text style={styles.date}>{date && date}</Text>
-      <ScrollView 
-      showsVerticalScrollIndicator={false} style={styles.choreList}>
-        {chores.length > 0 ? (
-          chores.map((el) => (
-            <Chore
-              key={el.id}
-              title={el.title}
-              member={el.member}
-              description={el.description}
-              dueDate={el.dueDate}
-            />
-          ))
-        ) : (
-          <Text>You haven't added any chores.</Text>
-        )}
+
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
+        <Text>In Progress:</Text>
+        {family.chores.length > 0 &&
+          family.chores.map((el) => {
+            if (!el.isComplete) {
+              return (
+                <Chore
+                  key={el.id}
+                  title={el.title}
+                  member={el.member}
+                  description={el.description}
+                  dueDate={el.dueDate}
+                  id={el.id}
+                  completeChore={completeChore}
+                />
+              );
+            }
+          })}
+        <Text>Completed:</Text>
+        {family.chores.length > 0 &&
+          family.chores.map((el) => {
+            if (el.isComplete) {
+              return (
+                <Chore
+                  key={el.id}
+                  title={el.title}
+                  member={el.member}
+                  description={el.description}
+                  dueDate={el.dueDate}
+                  id={el.id}
+                />
+              );
+            }
+          })}
       </ScrollView>
       <View style={styles.btnContainer}>
         <Button
-        accessibilityLabel='addChore'
-          title="add chore"
+          title="Add Chore"
           color="#FFBD00"
           onPress={addFamilyChoresHandler}
         />
         <Button
-          onPress={familyManagementHandler}
-          title="family management"
+          onPress={dashboardHandler}
+          title="View Dashboard"
           color="#FFBD00"
         />
-        <Button title="logout" color="#FFBD00" />
       </View>
     </KeyboardAvoidingView>
   );

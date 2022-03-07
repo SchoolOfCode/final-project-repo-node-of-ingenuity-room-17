@@ -1,0 +1,226 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login /> renders correctly 1`] = `
+<View
+  accessibilityIgnoresInvertColors={true}
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Array [
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "height": "100%",
+          "width": "100%",
+        },
+        undefined,
+      ]
+    }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(0,0,0,0.4)",
+        "color": "white",
+        "flex": 1,
+        "height": "100%",
+        "justifyContent": "space-between",
+        "paddingBottom": 150,
+        "paddingLeft": 50,
+        "paddingRight": 50,
+        "paddingTop": 150,
+        "width": "100%",
+      }
+    }
+  >
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 64,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        tribe.
+      </Text>
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontSize": 24,
+          }
+        }
+      >
+        Your family, your rules.
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "paddingBottom": 0,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        autoFocus={true}
+        onChangeText={[Function]}
+        placeholder="youremail@email.com"
+        placeholderTextColor="black"
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "backgroundColor": "white",
+            "borderRadius": 5,
+            "height": 40,
+            "marginTop": 15,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "width": "100%",
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        placeholder="password"
+        placeholderTextColor="black"
+        rejectResponderTermination={true}
+        secureTextEntry={true}
+        style={
+          Array [
+            Object {
+              "backgroundColor": "white",
+              "borderRadius": 5,
+              "height": 40,
+              "marginTop": 15,
+              "paddingLeft": 10,
+              "paddingRight": 10,
+              "width": "100%",
+            },
+            Object {
+              "marginBottom": 20,
+            },
+          ]
+        }
+        underlineColorAndroid="transparent"
+      />
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "marginBottom": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        
+      </Text>
+      <View
+        accessibilityRole="button"
+        accessibilityState={Object {}}
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {},
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#007AFF",
+                  "fontSize": 18,
+                  "margin": 8,
+                  "textAlign": "center",
+                },
+                Object {
+                  "color": "white",
+                },
+              ]
+            }
+          >
+            Login
+          </Text>
+        </View>
+      </View>
+      <View
+        accessibilityRole="button"
+        accessibilityState={Object {}}
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {},
+            ]
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#007AFF",
+                  "fontSize": 18,
+                  "margin": 8,
+                  "textAlign": "center",
+                },
+                Object {
+                  "color": "white",
+                },
+              ]
+            }
+          >
+            Create Account
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
