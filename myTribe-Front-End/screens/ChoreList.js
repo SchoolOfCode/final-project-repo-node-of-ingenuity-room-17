@@ -88,7 +88,7 @@ updateFamily(updatedFamily, updatedFamily.docRef);
       <Text style={styles.date}>{date && date}</Text>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
         <Text style={styles.subHeading}>In Progress:</Text>
-        {family.chores.length > 0 &&
+        {family.chores && family.chores.length > 0 &&
           family.chores.map((el) => {
             if (!el.isComplete) {
               return (
@@ -107,7 +107,7 @@ updateFamily(updatedFamily, updatedFamily.docRef);
             }
           })}
         <Text style={styles.subHeading}>Completed:</Text>
-        {family.chores.length > 0 &&
+        {family.chores && family.chores.length > 0 &&
           family.chores.map((el) => {
             if (el.isComplete) {
               return (

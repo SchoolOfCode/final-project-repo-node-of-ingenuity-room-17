@@ -47,15 +47,24 @@ const Dashboard = (props) => {
     });
   }
 
+  let choreStreak;
+  let choresToDo;
+
 //COUNTS CHORES COMPLETED FOR STREAK BOX
-  const choreStreak = family.chores.filter((el)=>{
+
+if(family.chores){
+   choreStreak = family.chores.filter((el)=>{
     return el.isComplete
+
     })
-    
-//COUNTS CHORES TODO FOR STATUS BOX
-    const choresToDo = family.chores.filter((el)=>{
+    //COUNTS CHORES TODO FOR STATUS BOX
+     choresToDo = family.chores.filter((el)=>{
       return !el.isComplete
       })
+  }
+    
+
+  
 
   return (
     <View style={{ flex: 1 }}>
@@ -73,10 +82,10 @@ const Dashboard = (props) => {
         <View style={[styles.statusBlock, { zIndex: 2 }]}>
           <View style={styles.statusButton}>
             <Text style={styles.statusText}>Chores</Text>
-            <Text style={styles.statusNumber}>{choresToDo.length}</Text>
+            <Text style={styles.statusNumber}>{choresToDo ? choresToDo.length : 0}</Text>
           </View>
           <View style={styles.statusButton}>
-          <Text style={styles.streakText}>{choreStreak.length}</Text>
+          <Text style={styles.streakText}>{choreStreak ? choreStreak.length : 0}</Text>
             <Image style={styles.flame} source={flame} />
           </View>
         </View>
