@@ -24,55 +24,61 @@ const {family, setFamily} = useContext(pageState)
   // const [addChoreCalled, setAddChoreCalled] = useState(false)
 
   const addFamilyChoresHandler = () => {
-    props.navigation.navigate({ routename: "AddChores" });
+    props.navigation.navigate({ routeName: "AddChores" });
   };
 
-  // function addChoreToggler(){
-  //   setAddChoreCalled(!addChoreCalled)
-  // }
 
+// allowing the users to mark chore as completed
   const completeChore = (id) => {
-    // console.log("family chores:", family.chores)
+  
     
     const familyCopy = {...family};
+    const completedChoreID = familyCopy.chores.findIndex((el) => el.id === id);
     const completedChore = familyCopy.chores.find((el) => el.id === id);
     let updatedChores = [];
-    if (completedChore.id === 1) {
+    if (completedChoreID === 0) {
       updatedChores = [
         { ...completedChore, isComplete: true },
         ...familyCopy.chores.slice(1),
       ];
     } else {
-      updatedChores = [...familyCopy.chores.slice(0, completedChore.id - 1), {...completedChore, isComplete: true} , ...familyCopy.chores.slice(completedChore.id)
-      ]
-    }
-    console.log("updated chores:", updatedChores)
-    console.log("family chores:", family.chores)
+    updatedChores = familyCopy.chores.filter((el, index)=>{
+        if(index !== completedChoreID){
+          return el
+        }
+    })
+
+    updatedChores=[...updatedChores, {...completedChore, isComplete: true}]
+  }
+
 const updatedFamily = {...familyCopy, chores: updatedChores}
     setFamily(updatedFamily);
     updateFamily(updatedFamily, updatedFamily.docRef);
-    console.log("updated family", updatedFamily.docRef)
+
   };
 
-  const dashboardHandler = (name) => {
-    props.navigation.setParams({ routeName: "Dashboard" });
-    props.navigation.navigate("Dashboard", {
-      family: family,
-      member: name,
-    });
+  //allow users to delete completed chore
+  function deleteChore(id){
+
+    const familyCopy = {...family};
+    const completedChore = familyCopy.chores.findIndex((el) => el.id === id);
+    let updatedChores = familyCopy.chores.filter((el, index)=>{
+      if(index !== completedChore){
+        return el
+      }
+    })
+
+const updatedFamily = {...familyCopy, chores: updatedChores}
+updateFamily(updatedFamily, updatedFamily.docRef);
+    setFamily(updatedFamily);
+  }
+
+  const dashboardHandler = () => {
+    props.navigation.navigate({ routeName: "Dashboard" });
+ 
   };
 
-  // useEffect(() => {
-  //   const newFamily = props.navigation.getParam("family");
-  //   console.log('use Effect called')
-  //   // console.log(newFamily);
-  //   setFamily(newFamily);
-  //   setCurrentMember(newFamily.members[0].name);
-  //   if (newFamily.chores !== undefined) {
-  //     setChores(newFamily.chores);
-  //   }
-  //   setDate(getDateDisplay());
-  // }, []);
+
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -80,9 +86,8 @@ const updatedFamily = {...familyCopy, chores: updatedChores}
         {family.memberSession && `${family.memberSession}'s chores`}
       </Text>
       <Text style={styles.date}>{date && date}</Text>
-
       <ScrollView showsVerticalScrollIndicator={false} style={styles.choreList}>
-        <Text>In Progress:</Text>
+        <Text style={styles.subHeading}>In Progress:</Text>
         {family.chores.length > 0 &&
           family.chores.map((el) => {
             if (!el.isComplete) {
@@ -94,12 +99,14 @@ const updatedFamily = {...familyCopy, chores: updatedChores}
                   description={el.description}
                   dueDate={el.dueDate}
                   id={el.id}
+                  isComplete={el.isComplete}
                   completeChore={completeChore}
+                  deleteChore = {deleteChore}
                 />
               );
             }
           })}
-        <Text>Completed:</Text>
+        <Text style={styles.subHeading}>Completed:</Text>
         {family.chores.length > 0 &&
           family.chores.map((el) => {
             if (el.isComplete) {
@@ -111,6 +118,9 @@ const updatedFamily = {...familyCopy, chores: updatedChores}
                   description={el.description}
                   dueDate={el.dueDate}
                   id={el.id}
+                  isComplete={el.isComplete}
+                  completeChore={completeChore}
+                  deleteChore = {deleteChore}
                 />
               );
             }
@@ -160,4 +170,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
   },
+  subHeading: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    marginTop: 15,
+  }
 });

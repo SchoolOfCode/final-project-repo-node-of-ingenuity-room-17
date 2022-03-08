@@ -7,7 +7,7 @@ const Streak = (props) => {
 
   const handleIncrement = () => {
     setCount(count + 1);
-    console.log("count:", count);
+
   };
 
   return (
