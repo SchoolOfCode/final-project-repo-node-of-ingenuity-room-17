@@ -1,8 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import { render, screen, FireEvent } from '@testing-library/react-native';
+import { render } from '@testing-library/react-native';
 import {expect, it, jest} from '@jest/globals'
 import Welcome from './Welcome'
+import renderer from "react-test-renderer";
 
 
 describe("<Welcome />", () => {

@@ -1,7 +1,7 @@
-import React from "react";
+import { render } from '@testing-library/react-native';
+import {expect, it, jest} from '@jest/globals'
+import Dashboard from './Dashboard'
 import renderer from "react-test-renderer";
-
-import Dashboard from "./Dashboard";
 
 describe("<Dashboard />", () => {
   it("has 2 children", () => {

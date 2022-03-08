@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Login /> renders correctly 1`] = `
+exports[`check if Login screen renders correctly 1`] = `
 <View
   accessibilityIgnoresInvertColors={true}
   style={
@@ -193,6 +193,7 @@ exports[`<Login /> renders correctly 1`] = `
             "opacity": 1,
           }
         }
+        testID="login"
       >
         <View
           style={
