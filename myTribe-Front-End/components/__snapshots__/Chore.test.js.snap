@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App created renders correctly 1`] = `
+exports[`Check if chore component has 4 children  Check if chore component renders correctly 1`] = `
 <View
   accessible={true}
   focusable={false}
