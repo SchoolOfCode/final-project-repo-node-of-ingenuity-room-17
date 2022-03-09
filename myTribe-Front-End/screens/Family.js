@@ -11,9 +11,10 @@ import {
   ScrollView,
 } from "react-native";
 
+import DisplayFamilyMembers from "../components/DisplayFamilyMembers";
 import { useState, useEffect, useContext } from "react";
 import headerImage from "../assets/family-background.jpeg";
-import AddFamilyMember from "../components/AddFamilyMember";
+//import AddFamilyMember from "../components/AddFamilyMember";
 import { addToDb, getFamily, updateFamily } from "../firebase/firestore";
 import { pageState } from "../App";
 const screenHeight = Dimensions.get("window").height;
@@ -36,7 +37,7 @@ export default function Family(props) {
     setMembers(newMembers);
   };
 
-  const renderMemberControls = () => {
+  /* const renderMemberControls = () => {
     const elements = [];
     for (let i = 0; i < addMemberControls; i++) {
       elements.push(
@@ -48,7 +49,7 @@ export default function Family(props) {
       );
     }
     return elements;
-  };
+  }; */
 
   function continueHandler() {
     const familyFinal = {
@@ -112,7 +113,9 @@ export default function Family(props) {
                 <Text style={styles.memberLabel}>Name</Text>
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
-              {renderMemberControls()}
+
+              <DisplayFamilyMembers family={family} />
+              {/* {renderMemberControls()} */}
             </View>
           </ScrollView>
           <View style={styles.btnContainer}>
