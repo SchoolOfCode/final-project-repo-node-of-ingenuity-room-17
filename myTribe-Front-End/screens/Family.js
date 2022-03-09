@@ -29,13 +29,14 @@ export default function Family(props) {
 
   //const [family, setFamily] = useState(false);
 
-  const {family, setFamily} = useContext(pageState)
+  
 
   const [familyName, setFamilyName] = useState("");
-  const [members, setMembers] = useState(family.members);
+
   const [addMemberControls, setMemberControls] = useState(1);
   const [docID, setDocID] = useState("");
   const { family, setFamily } = useContext(pageState);
+  const [members, setMembers] = useState(family.members);
   const addMemberHandler = () => {
     setMemberControls(addMemberControls + 1);
   };
@@ -61,24 +62,29 @@ export default function Family(props) {
   };
 
   function continueHandler() {
-    const familyFinal = {
+    const finalFamily = {
       ...family,
       familyName: familyName,
       members: members,
-      docRef: docID,
+      
     };
-    updateFamily(familyFinal, docID);
-    setFamily(familyFinal);
+    // setFamily(updatedFamily);
+    updateFamily(finalFamily, finalFamily.docRef);
+    setFamily(finalFamily)
     props.navigation.navigate({ routeName: "ChoreList" });
 
   }
 
-  useEffect(() => {
-    // const newFamily = props.navigation.getParam("family");
-    // setFamily(newFamily);
-    // setMembers(newFamily.members);
-    setDocID(props.navigation.getParam("docID"));
-  }, []);
+
+  
+
+
+  // useEffect(() => {
+  // //   // const newFamily = props.navigation.getParam("family");
+  // //   // setFamily(newFamily);
+  // //   // setMembers(newFamily.members);
+  //   setDocID(props.navigation.getParam("docID"));
+  // }, []);
 
   return (
     <KeyboardAvoidingView
