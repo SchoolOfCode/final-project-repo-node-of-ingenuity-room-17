@@ -11,22 +11,31 @@ import {
   ScrollView,
 } from "react-native";
 
+
+import DisplayFamilyMembers from "../components/DisplayFamilyMembers";
+
 import { useState, useEffect, useContext } from "react";
 import headerImage from "../assets/family-background.jpeg";
 import AddFamilyMember from "../components/AddFamilyMember";
 import { addToDb, getFamily, updateFamily } from "../firebase/firestore";
-import {pageState} from "../App"
+
+import { pageState } from "../App";
+import { connectFirestoreEmulator } from "firebase/firestore";
 
 const screenHeight = Dimensions.get("window").height;
 //TODO: change addImage when clicked to a remove icon so the user can remove the extra user that they added.
 
 export default function Family(props) {
+
+  //const [family, setFamily] = useState(false);
+
   const {family, setFamily} = useContext(pageState)
+
   const [familyName, setFamilyName] = useState("");
   const [members, setMembers] = useState(family.members);
   const [addMemberControls, setMemberControls] = useState(1);
   const [docID, setDocID] = useState("");
-
+  const { family, setFamily } = useContext(pageState);
   const addMemberHandler = () => {
     setMemberControls(addMemberControls + 1);
   };
@@ -92,11 +101,18 @@ export default function Family(props) {
             showsVerticalScrollIndicator={false}
           >
             <Text style={styles.sectionHeading}>Family Details</Text>
-            <Text style={styles.label}>Family Name</Text>
-            <TextInput
-              onChangeText={(text) => setFamilyName(text)}
-              style={styles.input}
-            />
+            {family.members.length > 0 ? (
+              <Text style={styles.label}>{family.familyName}</Text>
+            ) : (
+              <KeyboardAvoidingView>
+                <ScrollView>
+                  <TextInput
+                    onChangeText={(text) => setFamilyName(text)}
+                    style={styles.input}
+                  />
+                </ScrollView>
+              </KeyboardAvoidingView>
+            )}
 
             <Text style={styles.subSectionHeading}>Family members</Text>
             <View style={styles.familyMembersBox}>
@@ -104,6 +120,8 @@ export default function Family(props) {
                 <Text style={styles.memberLabel}>Name</Text>
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
+
+              <DisplayFamilyMembers family={family} />
               {renderMemberControls()}
             </View>
           </ScrollView>
