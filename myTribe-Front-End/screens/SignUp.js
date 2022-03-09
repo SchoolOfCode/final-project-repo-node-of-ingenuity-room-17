@@ -103,6 +103,7 @@ export default function SignUp(props) {
 					<Text style={styles.error}>{error}</Text>
 					<View style={styles.btnContainer}>
 						<Button
+						testID='signUpButton'
 							onPress={handleSignUp}
 							buttonStyle={styles.btn}
 							color='#FEB800'

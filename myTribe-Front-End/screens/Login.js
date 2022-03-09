@@ -77,6 +77,7 @@ export default function Login(props) {
           <Button
             title="Create Account"
             color="white"
+            testID="login"
             onPress={() =>
               props.navigation.navigate({
                 routeName: "SignUp",
