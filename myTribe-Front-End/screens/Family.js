@@ -14,9 +14,10 @@ import {
 import DisplayFamilyMembers from "../components/DisplayFamilyMembers";
 import { useState, useEffect, useContext } from "react";
 import headerImage from "../assets/family-background.jpeg";
-//import AddFamilyMember from "../components/AddFamilyMember";
+import AddFamilyMember from "../components/AddFamilyMember";
 import { addToDb, getFamily, updateFamily } from "../firebase/firestore";
 import { pageState } from "../App";
+import { connectFirestoreEmulator } from "firebase/firestore";
 const screenHeight = Dimensions.get("window").height;
 //TODO: change addImage when clicked to a remove icon so the user can remove the extra user that they added.
 
@@ -37,7 +38,7 @@ export default function Family(props) {
     setMembers(newMembers);
   };
 
-  /* const renderMemberControls = () => {
+  const renderMemberControls = () => {
     const elements = [];
     for (let i = 0; i < addMemberControls; i++) {
       elements.push(
@@ -49,7 +50,7 @@ export default function Family(props) {
       );
     }
     return elements;
-  }; */
+  };
 
   function continueHandler() {
     const familyFinal = {
@@ -115,7 +116,7 @@ export default function Family(props) {
               </View>
 
               <DisplayFamilyMembers family={family} />
-              {/* {renderMemberControls()} */}
+              {renderMemberControls()}
             </View>
           </ScrollView>
           <View style={styles.btnContainer}>
