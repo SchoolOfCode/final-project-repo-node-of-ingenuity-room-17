@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+
 exports[`Check if chore component has 4 children  Check if chore component renders correctly 1`] = `
+
 <View
   accessible={true}
   focusable={false}
@@ -14,6 +16,8 @@ exports[`Check if chore component has 4 children  Check if chore component rende
   style={
     Object {
       "backgroundColor": "white",
+
+
       "marginBottom": 10,
       "opacity": 1,
       "padding": 10,

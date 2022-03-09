@@ -21,17 +21,7 @@ const ModalPicker = (props) => {
 		props.setData(option);
 	};
 	//GOES THROUGH DUMMY DATA AT INDEX
-	const option = props.members.map((item, index) => {
-		return (
-			<TouchableOpacity
-				style={styles.option}
-				key={index}
-				onPress={() => onPressItem(item)}
-			>
-				<Text style={styles.optionText}>{item}</Text>
-			</TouchableOpacity>
-		);
-	});
+
 	return (
 		<TouchableOpacity
 			style={styles.container}
@@ -43,7 +33,16 @@ const ModalPicker = (props) => {
 					{ width: WIDTH - 80, height: props.members.length * 43 },
 				]}
 			>
-				<ScrollView>{option}</ScrollView>
+				<ScrollView>{props.members.map((el)=>{
+					return (<TouchableOpacity
+				style={styles.option}
+				key={el.id}
+				onPress={() => onPressItem(el.name)}
+			>
+				<Text style={styles.optionText}>{el.name}</Text>
+			</TouchableOpacity>
+					)
+				})}</ScrollView>
 			</View>
 		</TouchableOpacity>
 	);

@@ -11,18 +11,19 @@ import {
   ScrollView,
 } from "react-native";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import headerImage from "../assets/family-background.jpeg";
 import AddFamilyMember from "../components/AddFamilyMember";
 import { addToDb, getFamily, updateFamily } from "../firebase/firestore";
+import {pageState} from "../App"
 
 const screenHeight = Dimensions.get("window").height;
 //TODO: change addImage when clicked to a remove icon so the user can remove the extra user that they added.
 
 export default function Family(props) {
-  const [family, setFamily] = useState(false);
+  const {family, setFamily} = useContext(pageState)
   const [familyName, setFamilyName] = useState("");
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState(family.members);
   const [addMemberControls, setMemberControls] = useState(1);
   const [docID, setDocID] = useState("");
 
@@ -59,16 +60,14 @@ export default function Family(props) {
     };
     updateFamily(familyFinal, docID);
     setFamily(familyFinal);
-    props.navigation.setParams({ routeName: "ChoreList" });
-    props.navigation.navigate("ChoreList", {
-      family: familyFinal,
-    });
+    props.navigation.navigate({ routeName: "ChoreList" });
+
   }
 
   useEffect(() => {
-    const newFamily = props.navigation.getParam("family");
-    setFamily(newFamily);
-    setMembers(newFamily.members);
+    // const newFamily = props.navigation.getParam("family");
+    // setFamily(newFamily);
+    // setMembers(newFamily.members);
     setDocID(props.navigation.getParam("docID"));
   }, []);
 

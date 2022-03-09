@@ -19,26 +19,31 @@ const Chore = ({
   description,
   isComplete,
   completeChore,
+  deleteChore,
   id,
 }) => {
   return (
     <TouchableOpacity
       onLongPress={() => {
+        if(isComplete){
+          deleteChore(id)
+        } else{
         completeChore(id);
+        }
       }}
       style={isComplete ? styles.viewCompleted : styles.chore}
     >
-      <Text style={isComplete ? styles.titleCompleted : styles.title}>
+      <Text style={styles.title}>
         {title}
       </Text>
-      <Text style={isComplete ? styles.memberCompleted : styles.member}>
+      <Text style={styles.member}>
         {member}
       </Text>
-      <Text style={isComplete ? styles.dateCompleted : styles.dueDate}>
+      <Text style={styles.dueDate}>
         {dueDate}
       </Text>
       <Text
-        style={isComplete ? styles.descriptionCompleted : styles.description}
+        style={styles.description}
       >
         {description}
       </Text>
@@ -57,6 +62,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 2,
     shadowOpacity: 0.1,
+    borderRadius: 10,
   },
 
   dueDate: {
@@ -82,25 +88,20 @@ const styles = StyleSheet.create({
     color: "#AAAAAC",
   },
   viewCompleted: {
-    backgroundColor: "#FFBD00",
-    color: "white",
+    width: "100%",
+    marginBottom: 10,
+    position: "relative",
+    padding: 10,
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 2,
+    shadowOpacity: 0.1,
+  borderColor: "limegreen",
+   borderWidth: 1,
+   borderRadius: 10,
   },
-  titleCompleted: {
-    backgroundColor: "#FFBD00",
-    color: "white",
-  },
-  memberCompleted: {
-    backgroundColor: "#FFBD00",
-    color: "white",
-  },
-  descriptionCompleted: {
-    backgroundColor: "#FFBD00",
-    color: "white",
-  },
-  dateCompleted: {
-    backgroundColor: "#FFBD00",
-    color: "white",
-  },
+
 });
 
 export default Chore;

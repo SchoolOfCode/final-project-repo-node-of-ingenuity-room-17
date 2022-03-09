@@ -10,7 +10,7 @@ import {
 	KeyboardAvoidingView,
 	Dimensions,
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import headerImage from '../assets/header-background.jpeg';
 import {
 	createUserWithEmailAndPassword,
@@ -21,9 +21,12 @@ import { auth } from '../firebase/firebaseConfig';
 import { addToDb } from '../firebase/firestore';
 import authErrorCheck from '../utils/authErrorCheck';
 import { DocumentReference } from 'firebase/firestore';
+import {pageState} from "../App"
+
 const screenHeight = Dimensions.get('window').height;
 
 export default function SignUp(props) {
+	const {family, setFamily} = useContext(pageState)
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -35,17 +38,18 @@ export default function SignUp(props) {
 			createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredentials) => {
 					const user = userCredentials.user;
-					const family = {
+					const newFamily = {
 						uid: user.uid,
 						members: [{ id: 1, name: name, isParent: true }],
 					};
-					addToDb(family).then((res) => {
+					addToDb(newFamily).then((res) => {
 						props.navigation.setParams({ routeName: 'Family' });
 						props.navigation.navigate('Family', {
 							family: family,
 							docID: res,
 						});
 					});
+					setFamily(newFamily)
 				})
 				.catch((error) => authErrorCheck(error, setError));
 			return;

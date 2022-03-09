@@ -47,7 +47,24 @@ const Dashboard = (props) => {
     });
   }
 
-  console.log(props.navigation.getParam("family"));
+  let choreStreak;
+  let choresToDo;
+
+//COUNTS CHORES COMPLETED FOR STREAK BOX
+
+if(family.chores){
+   choreStreak = family.chores.filter((el)=>{
+    return el.isComplete
+
+    })
+    //COUNTS CHORES TODO FOR STATUS BOX
+     choresToDo = family.chores.filter((el)=>{
+      return !el.isComplete
+      })
+  }
+    
+
+  
 
   return (
     <View style={{ flex: 1 }}>
@@ -65,9 +82,10 @@ const Dashboard = (props) => {
         <View style={[styles.statusBlock, { zIndex: 2 }]}>
           <View style={styles.statusButton}>
             <Text style={styles.statusText}>Chores</Text>
-            <Text style={styles.statusNumber}>5</Text>
+            <Text style={styles.statusNumber}>{choresToDo ? choresToDo.length : 0}</Text>
           </View>
           <View style={styles.statusButton}>
+          <Text style={styles.streakText}>{choreStreak ? choreStreak.length : 0}</Text>
             <Image style={styles.flame} source={flame} />
           </View>
         </View>
@@ -93,7 +111,7 @@ const Dashboard = (props) => {
           <TouchableOpacity onPress={addChoresHandler}>
             <View style={styles.mainButton}>
               <Image style={styles.mainButtonImage} source={manageChores} />
-              <Text style={styles.mainButtonText}>Manage Chores</Text>
+              <Text style={styles.mainButtonText}>Add Chores</Text>
             </View>
           </TouchableOpacity>
 
@@ -276,4 +294,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     zIndex: 5,
   },
+  streakText: {
+    position: "absolute",
+    zIndex: 2,
+    top: 45,
+    textAlign: 'center',
+    fontSize: 24,
+  }
 });
