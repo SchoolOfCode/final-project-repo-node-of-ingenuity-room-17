@@ -1,25 +1,28 @@
 import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import streak from "../assets/fire-streak.png";
+import {pageState} from "../App"
 
 const Streak = (props) => {
-  const [count, setCount] = useState(0);
+  const {family, setFamily} = useContext(pageState)
 
-  const handleIncrement = () => {
-    setCount(count + 1);
-    console.log("count:", count);
-  };
+const choreStreak = family.chores.filter((el)=>{
+return el.isComplete
+})
+
+
+
 
   return (
     <View style={styles.container}>
       <ImageBackground resizeMode="cover" style={styles.streak} source={streak}>
         <View style={styles.streakOverlay}>
-          <Text style={styles.streakText}>{count}</Text>
+          <Text style={styles.streakText}>{choreStreak.length}</Text>
         </View>
       </ImageBackground>
-      <Text style={styles.heading} onPress={handleIncrement}>
+      <Text style={styles.heading}>
         {" "}
-        {count} day streak!{" "}
+        {choreStreak.length} chores completed!{" "}
       </Text>
       <Text style={styles.subHeading}>
         Complete your chores everyday to build your streak!
@@ -57,7 +60,8 @@ const styles = StyleSheet.create({
 
   // Text
   heading: {
-    fontSize: 40,
+    fontSize: 30,
+    marginTop: 10,
     fontWeight: "bold",
     color: "black",
   },

@@ -259,7 +259,6 @@ exports[`App created renders correctly 1`] = `
                           }
                         >
                           <TextInput
-                            accessibilityLabel="email"
                             allowFontScaling={true}
                             autoFocus={true}
                             onChangeText={[Function]}
@@ -280,7 +279,6 @@ exports[`App created renders correctly 1`] = `
                             underlineColorAndroid="transparent"
                           />
                           <TextInput
-                            accessibilityLabel="password"
                             allowFontScaling={true}
                             onChangeText={[Function]}
                             placeholder="password"
@@ -317,7 +315,6 @@ exports[`App created renders correctly 1`] = `
                             
                           </Text>
                           <View
-                            accessibilityLabel="loginButton"
                             accessibilityRole="button"
                             accessibilityState={Object {}}
                             accessible={true}
@@ -378,6 +375,7 @@ exports[`App created renders correctly 1`] = `
                                 "opacity": 1,
                               }
                             }
+                            testID="login"
                           >
                             <View
                               style={

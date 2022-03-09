@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SignUp /> renders correctly 1`] = `
+exports[`check signup screen renders correctly 1`] = `
 <View
   onLayout={[Function]}
   style={
@@ -139,6 +139,7 @@ exports[`<SignUp /> renders correctly 1`] = `
                 "width": "100%",
               }
             }
+            testID="textInput"
             underlineColorAndroid="transparent"
           />
           <Text
@@ -261,6 +262,7 @@ exports[`<SignUp /> renders correctly 1`] = `
                   "opacity": 1,
                 }
               }
+              testID="signUpButton"
             >
               <View
                 style={
