@@ -37,9 +37,14 @@ export default function Family(props) {
   const [docID, setDocID] = useState("");
   const { family, setFamily } = useContext(pageState);
   const [members, setMembers] = useState(family.members);
+  
   const addMemberHandler = () => {
     setMemberControls(addMemberControls + 1);
   };
+  const deleteMemberHandle = () => {
+    console.log("this function clicked")
+    setMemberControls(addMemberControls - 1);
+  }
 
   const addMember = (name, isParent) => {
     let id = members[members.length - 1].id + 1;
@@ -55,6 +60,8 @@ export default function Family(props) {
           key={i}
           pressHandler={addMemberHandler}
           addMember={addMember}
+          deleteMember ={deleteMemberHandle}
+          members= {addMemberControls}
         />
       );
     }
@@ -112,6 +119,7 @@ export default function Family(props) {
             ) : (
               <KeyboardAvoidingView>
                 <ScrollView>
+                  <Text style={styles.memberLabels}>Enter your family name:</Text>
                   <TextInput
                     onChangeText={(text) => setFamilyName(text)}
                     style={styles.input}
