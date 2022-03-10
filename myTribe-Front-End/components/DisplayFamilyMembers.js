@@ -2,11 +2,12 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import deleteUserIcon from "../assets/delete-user.png";
 
-export default function DisplayFamilyMembers({ family }) {
-  return family.members.map((el) => {
+export default function DisplayFamilyMembers(props) {
+  
+  return props.family.members.map((el) => {
     return (
       <View key={el.id} style={styles.memberControls}>
-        <Text style={styles.memberName} key={el.id}>
+        <Text style={styles.memberName} key={el.id} id={el.id}>
           {el.name}
         </Text>
         <BouncyCheckbox
@@ -14,7 +15,7 @@ export default function DisplayFamilyMembers({ family }) {
           fillColor="#FFBD00"
           isChecked={el.isParent}
         />
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {props.deleteFamily}>
           <Image style={styles.addIcon} source={deleteUserIcon} />
         </TouchableOpacity>
       </View>

@@ -68,6 +68,23 @@ export default function Family(props) {
     return elements;
   };
 
+  function deleteFamilyMember(id){
+
+    const familyCopy = {...family};
+    const deletedFamily= familyCopy.members.findIndex((el) => el.id === id);
+    let updatedFamilyMembers = familyCopy.members.filter((el, index)=>{
+      if(index !== deletedFamily){
+        return el
+      }   
+    })
+console.log("This delete function is fired and this is id", id);
+const updatedFamily = {...familyCopy, members: updatedFamilyMembers}
+updateFamily(updatedFamily, updatedFamily.docRef);
+    setFamily(updatedFamily);
+  
+  }
+
+
   function continueHandler() {
     const finalFamily = {
       ...family,
@@ -82,7 +99,7 @@ export default function Family(props) {
 
   }
 
-
+console.log("this is family name", family.familyName)
   
 
 
@@ -92,6 +109,7 @@ export default function Family(props) {
   // //   // setMembers(newFamily.members);
   //   setDocID(props.navigation.getParam("docID"));
   // }, []);
+  
 
   return (
     <KeyboardAvoidingView
@@ -114,9 +132,9 @@ export default function Family(props) {
             showsVerticalScrollIndicator={false}
           >
             <Text style={styles.sectionHeading}>Family Details</Text>
-            {family.members.length > 0 ? (
+            {family.familyName ? (
               <Text style={styles.label}>{family.familyName}</Text>
-            ) : (
+            ) :  (
               <KeyboardAvoidingView>
                 <ScrollView>
                   <Text style={styles.memberLabels}>Enter your family name:</Text>
@@ -135,7 +153,7 @@ export default function Family(props) {
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
 
-              <DisplayFamilyMembers family={family} />
+              <DisplayFamilyMembers family={family} deleteFamily = {deleteFamilyMember} id={id}/>
               {renderMemberControls()}
             </View>
           </ScrollView>
