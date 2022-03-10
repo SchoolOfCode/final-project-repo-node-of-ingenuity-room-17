@@ -29,16 +29,22 @@ export default function Family(props) {
 
   //const [family, setFamily] = useState(false);
 
-  const {family, setFamily} = useContext(pageState)
+  
 
   const [familyName, setFamilyName] = useState("");
-  const [members, setMembers] = useState(family.members);
+
   const [addMemberControls, setMemberControls] = useState(1);
   const [docID, setDocID] = useState("");
   const { family, setFamily } = useContext(pageState);
+  const [members, setMembers] = useState(family.members);
+  
   const addMemberHandler = () => {
     setMemberControls(addMemberControls + 1);
   };
+  const deleteMemberHandle = () => {
+    console.log("this function clicked")
+    setMemberControls(addMemberControls - 1);
+  }
 
   const addMember = (name, isParent) => {
     let id = members[members.length - 1].id + 1;
@@ -54,31 +60,56 @@ export default function Family(props) {
           key={i}
           pressHandler={addMemberHandler}
           addMember={addMember}
+          deleteMember ={deleteMemberHandle}
+          members= {addMemberControls}
         />
       );
     }
     return elements;
   };
 
+  function deleteFamilyMember(id){
+
+    const familyCopy = {...family};
+    const deletedFamily= familyCopy.members.findIndex((el) => el.id === id);
+    let updatedFamilyMembers = familyCopy.members.filter((el, index)=>{
+      if(index !== deletedFamily){
+        return el
+      }   
+    })
+console.log("This delete function is fired and this is id", id);
+const updatedFamily = {...familyCopy, members: updatedFamilyMembers}
+updateFamily(updatedFamily, updatedFamily.docRef);
+    setFamily(updatedFamily);
+  
+  }
+
+
   function continueHandler() {
-    const familyFinal = {
+    const finalFamily = {
       ...family,
       familyName: familyName,
       members: members,
-      docRef: docID,
+      
     };
-    updateFamily(familyFinal, docID);
-    setFamily(familyFinal);
+    // setFamily(updatedFamily);
+    updateFamily(finalFamily, finalFamily.docRef);
+    setFamily(finalFamily)
     props.navigation.navigate({ routeName: "ChoreList" });
 
   }
 
-  useEffect(() => {
-    // const newFamily = props.navigation.getParam("family");
-    // setFamily(newFamily);
-    // setMembers(newFamily.members);
-    setDocID(props.navigation.getParam("docID"));
-  }, []);
+console.log("this is family name", family.familyName)
+  
+
+
+  // useEffect(() => {
+  // //   // const newFamily = props.navigation.getParam("family");
+  // //   // setFamily(newFamily);
+  // //   // setMembers(newFamily.members);
+  //   setDocID(props.navigation.getParam("docID"));
+  // }, []);
+  
 
   return (
     <KeyboardAvoidingView
@@ -101,11 +132,12 @@ export default function Family(props) {
             showsVerticalScrollIndicator={false}
           >
             <Text style={styles.sectionHeading}>Family Details</Text>
-            {family.members.length > 0 ? (
+            {family.familyName ? (
               <Text style={styles.label}>{family.familyName}</Text>
-            ) : (
+            ) :  (
               <KeyboardAvoidingView>
                 <ScrollView>
+                  <Text style={styles.memberLabels}>Enter your family name:</Text>
                   <TextInput
                     onChangeText={(text) => setFamilyName(text)}
                     style={styles.input}
@@ -121,7 +153,7 @@ export default function Family(props) {
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
 
-              <DisplayFamilyMembers family={family} />
+              <DisplayFamilyMembers family={family} setFamily={setFamily}/>
               {renderMemberControls()}
             </View>
           </ScrollView>

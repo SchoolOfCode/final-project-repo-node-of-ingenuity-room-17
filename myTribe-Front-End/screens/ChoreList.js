@@ -60,6 +60,7 @@ const updatedFamily = {...familyCopy, chores: updatedChores}
   //allow users to delete completed chore
   function deleteChore(id){
 
+    console.log("This is chore's id", id);
     const familyCopy = {...family};
     const completedChore = familyCopy.chores.findIndex((el) => el.id === id);
     let updatedChores = familyCopy.chores.filter((el, index)=>{
@@ -67,7 +68,7 @@ const updatedFamily = {...familyCopy, chores: updatedChores}
         return el
       }
     })
-
+    console.log("This is chore's id", id)
 const updatedFamily = {...familyCopy, chores: updatedChores}
 updateFamily(updatedFamily, updatedFamily.docRef);
     setFamily(updatedFamily);
