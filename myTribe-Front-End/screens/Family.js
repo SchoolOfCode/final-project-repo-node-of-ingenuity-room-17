@@ -153,7 +153,7 @@ console.log("this is family name", family.familyName)
                 <Text style={styles.memberLabel}>Parent</Text>
               </View>
 
-              <DisplayFamilyMembers family={family} deleteFamily = {deleteFamilyMember} id={id}/>
+              <DisplayFamilyMembers family={family} setFamily={setFamily}/>
               {renderMemberControls()}
             </View>
           </ScrollView>
