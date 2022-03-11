@@ -100,18 +100,18 @@ Streak page - See the number of chores completed
 -----------------
 If you have any feedback, please raise an issue in the issues tab or reach out to us on **GitHub** at:
 
- [@CatrinMentzoni] (https://github.com/Babyoilrig)
-[@AlexanderTelecan] (https://github.com/alexandertelecan)
-[@LukeChaplin] (https://github.com/lukechaplin)
-[@IndyaMolloy] (https://github.com/indyamolloy)
-[@NadaFarooq] (https://github.com/nadacoder2021)
-[@MichaelAfabor] (https://github.com/afabor)
+ [@CatrinMentzoni](https://github.com/Babyoilrig) <br/>
+[@AlexanderTelecan](https://github.com/alexandertelecan) <br/>
+[@LukeChaplin](https://github.com/lukechaplin) <br/>
+[@IndyaMolloy](https://github.com/indyamolloy) <br/>
+[@NadaFarooq](https://github.com/nadacoder2021) <br/>
+[@MichaelAfabor](https://github.com/afabor) <br/>
 
 **or on LinkedIn:**
-[@CatrinMentzoni] (https://www.linkedin.com/in/catrin-mentzoni/)
-[@AlexanderTelecan] (https://www.linkedin.com/in/alexandertelecan/)
-[@LukeChaplin] https://www.linkedin.com/in/luke-chaplin-70a521b0/)
-[@IndyaMolloy] (https://www.linkedin.com/in/indya-carroll-molloy/)
+[@CatrinMentzoni](https://www.linkedin.com/in/catrin-mentzoni/) <br/>
+[@AlexanderTelecan](https://www.linkedin.com/in/alexandertelecan/) <br/>
+[@LukeChaplin](https://www.linkedin.com/in/luke-chaplin-70a521b0/) <br/>
+[@IndyaMolloy](https://www.linkedin.com/in/indya-carroll-molloy/) <br/>
  
 
 
