@@ -50,12 +50,13 @@ Next, run the command Npm Start - in order to run the repo on your Xcode emulato
 <br/><br/>
  
 **Features**
-============
+
 **Login Page** <br/>
 ------------------------------------------------------------------------------------------------------------------------------------
 <img src="https://user-images.githubusercontent.com/93347177/157850978-b460cdc8-b819-48b1-b655-a9e138844018.png" width="150px"><br/>
-<p>Login with existing account</p>
+Login with existing account
 <br/><br/>
+
 **Create Account Page** <br/>
 ------------------------------------------------------------------------------------------------------------------------------------
 <img src="https://user-images.githubusercontent.com/93347177/157850986-77956f71-8401-420e-8783-fc594941c847.png" width="150px"><br/>
