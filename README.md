@@ -107,11 +107,12 @@ If you have any feedback, please raise an issue in the issues tab or reach out t
 [@NadaFarooq](https://github.com/nadacoder2021) <br/>
 [@MichaelAfabor](https://github.com/afabor) <br/>
 
-**or on LinkedIn:**
+**or on LinkedIn:** <br/>
 [@CatrinMentzoni](https://www.linkedin.com/in/catrin-mentzoni/) <br/>
 [@AlexanderTelecan](https://www.linkedin.com/in/alexandertelecan/) <br/>
 [@LukeChaplin](https://www.linkedin.com/in/luke-chaplin-70a521b0/) <br/>
 [@IndyaMolloy](https://www.linkedin.com/in/indya-carroll-molloy/) <br/>
- 
+[@NadaFarooq](https://www.linkedin.com/in/nida-farooq-982230234/) <br/>
+[@MichaelAfabor](https://www.linkedin.com/in/michael-o-989321a7/) <br/>
 
 
