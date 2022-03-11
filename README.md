@@ -8,7 +8,7 @@ This app was created by a team of six called “Node of Ingenuity” during our 
 <br/><br/>
 Several team members faced difficulties in ensuring family members (and particularly children) were completing chores allocated to them.
 <br/><br/>
-**This app addresses this problem, allowing users to allocate chores to family members, specify the date a chore should be completed, and mark chores as completed. **
+**This app addresses this problem, allowing users to allocate chores to family members, specify the date a chore should be completed, and mark chores as completed.**
 <br/><br/>
 This is an app built with a React Native and Firebase, using the Expo framework. The app has been designed to be run on iPhone 11.
  <br/><br/>
