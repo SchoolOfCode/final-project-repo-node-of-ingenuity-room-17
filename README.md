@@ -1,6 +1,7 @@
 Tribe App
 ===========
 
+![app](giphy.gif)
 
 This app was created by a team of six called “Node of Ingenuity” during our School of Code week long final project.
 <br/><br/>
