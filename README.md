@@ -3,29 +3,29 @@ Tribe App
 
 
 This app was created by a team of six called “Node of Ingenuity” during our School of Code week long final project.
-<br/>
+<br/><br/>
 **We investigated multiple challenges experienced by individuals attending our bootcamp, and identified a common problem, which was: Family organisation.**
-<br/>
+<br/><br/>
 Several team members faced difficulties in ensuring family members (and particularly children) were completing chores allocated to them.
-<br/>
+<br/><br/>
 **This app addresses this problem, allowing users to allocate chores to family members, specify the date a chore should be completed, and mark chores as completed. **
-<br/>
+<br/><br/>
 This is an app built with a React Native and Firebase, using the Expo framework. The app has been designed to be run on iPhone 11.
- <br/>
+ <br/><br/>
  
 **Authors**
 --------------
-[@CatrinMentzoni] (https://github.com/Babyoilrig)
+[@CatrinMentzoni](https://github.com/Babyoilrig)
 <br/>
-[@AlexanderTelecan] (https://github.com/alexandertelecan)
+[@AlexanderTelecan](https://github.com/alexandertelecan)
 <br/>
-[@LukeChaplin] (https://github.com/lukechaplin)
+[@LukeChaplin](https://github.com/lukechaplin)
 <br/>
-[@IndyaMolloy] (https://github.com/indyamolloy)
+[@IndyaMolloy](https://github.com/indyamolloy)
 <br/>
-[@NadaFarooq] (https://github.com/nadacoder2021)
+[@NadaFarooq](https://github.com/nadacoder2021)
 <br/>
-[@MichaelAfabor] (https://github.com/afabor)
+[@MichaelAfabor](https://github.com/afabor)
 <br/>
  
  
@@ -33,21 +33,21 @@ This is an app built with a React Native and Firebase, using the Expo framework.
 **Installation**
 -----------------
 The app can only be run on an Apple machine, because it is run using the Xcode emulator which is only available on Mac.
-<br/>
+<br/><br/>
 **To run this app:**
-<br/>
-Download the Xcode emulator from [HERE] (https://developer.apple.com/xcode/)
-<br/>
+<br/><br/>
+Download the Xcode emulator from [HERE](https://developer.apple.com/xcode/)
+<br/><br/>
 Follow the instructions to install and run the emulator on your machine.
-<br/>
+<br/><br/>
 Next clone down this repository using an IDE such as VS Code.
-<br/>
+<br/><br/>
 CD into MYTRIBE-FRONT-END
-<br/>
+<br/><br/>
 Run the command Npm i - to install all the necessary dependencies for the repo.
-<br/>
+<br/><br/>
 Next, run the command Npm Start - in order to run the repo on your Xcode emulator.
-<br/>
+<br/><br/>
  
 **Features**
 -----------------
