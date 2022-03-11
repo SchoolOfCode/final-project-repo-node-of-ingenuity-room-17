@@ -51,24 +51,35 @@ Next, run the command Npm Start - in order to run the repo on your Xcode emulato
  
 **Features**
 -----------------
-![Login page](https://user-images.githubusercontent.com/93347177/157850978-b460cdc8-b819-48b1-b655-a9e138844018.png)
+**Login Page**
+<img src="https://user-images.githubusercontent.com/93347177/157850978-b460cdc8-b819-48b1-b655-a9e138844018.png" width="30px">
 Login with existing account
-
-![Sign up page](https://user-images.githubusercontent.com/93347177/157850986-77956f71-8401-420e-8783-fc594941c847.png)
+<br/><br/>
+**Create Account Page**
+<img src="https://user-images.githubusercontent.com/93347177/157850986-77956f71-8401-420e-8783-fc594941c847.png" width="30px">
 Create an authenticated account
-
-![Create family page](https://user-images.githubusercontent.com/93347177/157850972-668fb28f-3f49-47ce-a100-34c4ed6644c4.png)
+<br/><br/>
+**Family Page**
+<img src="https://user-images.githubusercontent.com/93347177/157850972-668fb28f-3f49-47ce-a100-34c4ed6644c4.png" width="30px">
 Set up your family - add details of different family members, their names, and whether or not they are a parent.
-![Add chore page](https://user-images.githubusercontent.com/93347177/157850999-0a7afceb-5f5c-4750-94ce-bb7886b8ae8f.png)
+<br/><br/>   
+**Add Chores Page**   
+<img src="https://user-images.githubusercontent.com/93347177/157850999-0a7afceb-5f5c-4750-94ce-bb7886b8ae8f.png" width="30px">
 Add chores to be completed, specify completion date and assign to family member.
-![View chores page](https://user-images.githubusercontent.com/93347177/157850997-3ac762a7-7d98-4c5f-b664-8f8c72e10837.png)
+<br/><br/>
+**View Chores Page**
+<img src="https://user-images.githubusercontent.com/93347177/157850997-3ac762a7-7d98-4c5f-b664-8f8c72e10837.png" width="30px">
 View chores and mark as completed.
-![Dashboard page](https://user-images.githubusercontent.com/93347177/157850976-6c038f8f-77e4-43ac-b27f-faf2b037709a.png)
+<br/><br/>
+**Dashboard Page**     
+<img src="https://user-images.githubusercontent.com/93347177/157850976-6c038f8f-77e4-43ac-b27f-faf2b037709a.png" width="30px">
 We also have a dashboard page - in which you can view chores, add chores, manage family (add new member etc), show streak.
- 
-![Streak page](https://user-images.githubusercontent.com/93347177/157850994-99689897-c6a1-4d96-8bc8-294077fc4807.png)
+<br/><br/> 
+**Streak Page** 
+<img src="https://user-images.githubusercontent.com/93347177/157850994-99689897-c6a1-4d96-8bc8-294077fc4807.png" width="30px">
 Streak page - See the number of chores completed
-Log out of existing account
+<br/><br/>
+
  
  
 **Feedback**
