@@ -3,7 +3,7 @@ Tribe App
 
 ![app](giphy.gif)
 
-This app was created by a team of six called “Node of Ingenuity” during our School of Code week long final project.
+This app was created by a team of six called “Node of Ingenuity” during our School of Code 4-week long final project.
 <br/><br/>
 **We investigated multiple challenges experienced by individuals attending our bootcamp, and identified a common problem, which was: Family organisation.**
 <br/><br/>
