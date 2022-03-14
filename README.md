@@ -11,7 +11,7 @@ Several team members faced difficulties in ensuring family members (and particul
 <br/><br/>
 **This app addresses this problem, allowing users to allocate chores to family members, specify the date a chore should be completed, and mark chores as completed.**
 <br/><br/>
-This is an app built with a React Native and Firebase, using the Expo framework. The app has been designed to be run on iPhone 11. <br/> We chose this stack as our research indicated that our potential users would much prefer a mobile application. We also wanted to challenge ourselves. The team had not previously worked with React Native or Firebase. 
+This is an app built with a React Native and Firebase, using the Expo framework. The app has been designed to be run on iPhone 11. <br/><br/> We chose this stack as our research indicated that our potential users would much prefer a mobile application. We also wanted to challenge ourselves. The team had not previously worked with React Native or Firebase. 
  <br/><br/>
  
 **Authors**
