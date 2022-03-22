@@ -10,13 +10,12 @@ import { useState, useContext } from "react";
 import { pageState } from "../App";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import addUserIcon from "../assets/add-user-light.png";
-import deleteUserIcon from "../assets/delete-user.png"
-
+import deleteUserIcon from "../assets/delete-user.png";
 
 export default function AddFamilyMember(props) {
   const [memberName, setMemberName] = useState("");
   const [isTicked, setIsTicked] = useState(false);
-  const [memberControl, setMemberControl] = useState(props.members)
+  const [memberControl, setMemberControl] = useState(props.members);
   const { family, setFamily } = useContext(pageState);
   const addMemberHandler = () => {
     if (memberName.trim() === "") {
@@ -29,11 +28,11 @@ export default function AddFamilyMember(props) {
 
   const deleteMemberHandler = () => {
     console.log(props.members);
-    if (props.members === 1 ) {
+    if (props.members === 1) {
       return;
     }
     props.deleteMember();
-    setMemberControl(props.members - 1)
+    setMemberControl(props.members - 1);
   };
 
   return (
@@ -48,9 +47,6 @@ export default function AddFamilyMember(props) {
       />
       <TouchableOpacity onPress={addMemberHandler}>
         <Image style={styles.addIcon} source={addUserIcon} />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={deleteMemberHandler}>
-        <Image style={styles.addIcon} source={deleteUserIcon} />
       </TouchableOpacity>
     </View>
   );

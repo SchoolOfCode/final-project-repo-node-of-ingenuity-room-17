@@ -4,18 +4,21 @@ import { useState } from "react";
 import Dashboard from "./screens/Dashboard";
 import Login from "./screens/Login";
 import Streak from "./screens/Streak";
-import React from 'react';
-import {createContext} from 'react'
+import React from "react";
+import { createContext } from "react";
 import ChoresNavigator from "./navigation/NavigationStack";
+import { LogBox } from "react-native";
+LogBox.ignoreAllLogs();
 
-export let pageState = React.createContext({})
+export let pageState = React.createContext({});
 
 export default function App() {
-  const [family, setFamily] = useState({})
-  return <pageState.Provider value={{family, setFamily}}>
-  <ChoresNavigator />
-  </pageState.Provider>;
-
+  const [family, setFamily] = useState({});
+  return (
+    <pageState.Provider value={{ family, setFamily }}>
+      <ChoresNavigator />
+    </pageState.Provider>
+  );
 }
 
 const styles = StyleSheet.create({
